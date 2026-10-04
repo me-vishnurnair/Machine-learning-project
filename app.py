@@ -386,6 +386,22 @@ def render_performance(artifacts: Artifacts | None, artifact_dir: Path, signatur
         f"Logistic Regression · {metrics['sample_count']:,} held-out transactions · "
         "balanced undersampled data, not the original population distribution."
     )
+    rebuilt = artifacts.metadata.get("model_origin") == "rebuilt_from_notebook_workflow"
+    if rebuilt:
+        details = artifacts.metadata.get("rebuilding", {})
+        st.caption(
+            f"New training run of the notebook workflow · undersampling seed {details.get('undersampling_seed', 42)} "
+            "· these scores describe the bundled rebuilt model."
+        )
+        warnings = details.get("training_warnings", [])
+        if warnings:
+            with st.expander("Training details"):
+                st.write(
+                    "The raw-feature solver reached the notebook's default 100-iteration limit. "
+                    "The original preprocessing and estimator settings were retained."
+                )
+                for warning in warnings:
+                    st.code(warning.get("message", ""), language="text")
     labels = [("Accuracy", "accuracy"), ("Precision", "precision"), ("Recall", "recall"), ("F1 score", "f1"), ("ROC-AUC", "roc_auc")]
     for col, (label, field) in zip(st.columns(5), labels):
         value = metrics[field]
@@ -429,7 +445,7 @@ def render_performance(artifacts: Artifacts | None, artifact_dir: Path, signatur
             "Input features": len(FEATURE_COLUMNS),
             "Preprocessing": "Raw features · no scaling or encoding",
             "Balancing": "Random undersampling (492 per class)",
-            "Evaluation": "Preserved notebook holdout",
+            "Evaluation": "Rebuilt workflow holdout" if rebuilt else "Preserved notebook holdout",
         }]),
         hide_index=True, width="stretch",
     )
@@ -628,6 +644,11 @@ def main() -> None:
 
     if data_error:
         st.warning(f"Exploration data could not be loaded: {data_error}")
+    if artifacts and artifacts.metadata.get("model_origin") == "rebuilt_from_notebook_workflow":
+        st.caption(
+            "Bundled model: a new, reproducible training run of your notebook workflow. "
+            "Recorded notebook accuracy and current model performance are shown separately."
+        )
     if page == "Home / Overview":
         render_overview(artifacts, data, source)
         if artifacts is None:

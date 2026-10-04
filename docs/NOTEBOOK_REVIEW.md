@@ -74,11 +74,34 @@ precision and accuracy depend on the evaluation population. The displayed fraud
 probability is the fitted model's `predict_proba` output; undersampling means it
 should not be interpreted as a calibrated real-world fraud probability.
 
-## Export the existing runtime
+## Included rebuilt runtime
+
+The project owner subsequently approved rebuilding this workflow from the public
+dataset. The repository now includes a real newly fitted Logistic Regression
+model, 5,492 exploration rows, the new run's exact 197-row holdout, and metadata.
+`prepare_model.py` adds `random_state=42` to legitimate undersampling, preserving
+the original raw feature order, default estimator, and stratified split with
+`random_state=2`. The original notebook's fitted coefficients were not recovered.
+
+The new run reports training accuracy **94.4091%** and holdout accuracy
+**94.4162%**, precision **96.7742%**, recall **91.8367%**, F1 **94.2408%**, and
+ROC-AUC **0.973511**. The historical notebook scores above remain attributed to
+the original unseeded run. The dashboard evaluates the included new-run holdout
+directly.
+
+The default unscaled `lbfgs` model reached its 100-iteration limit and emitted a
+`ConvergenceWarning`, recorded in `metadata.json`. The exported fitted model's
+predictions and probabilities were validated; this does not certify convergence.
+The workflow was preserved rather than silently changing the scaler, solver, or
+iteration limit. See [REBUILT_MODEL.md](REBUILT_MODEL.md) for the pinned source,
+fingerprints, package versions, exact metrics, and reproduction instructions.
+
+## Optional: export the existing Colab runtime
 
 The uploaded `.ipynb` contains code and recorded outputs, but **no fitted estimator
-or underlying CSV**. A model cannot be reconstructed from its accuracy. To make
-actual predictions, export the objects from the original Google Colab runtime:
+or underlying CSV**. A model cannot be reconstructed from its accuracy. The
+included rebuilt model already enables predictions. If the original live Google
+Colab runtime is later available, export its objects to use that particular model:
 
 1. Open the original notebook where `model`, `X`, `X_train`, `X_test`, `Y_train`,
    `Y_test`, and `credit_card_data` are still available.
@@ -100,11 +123,12 @@ actual predictions, export the objects from the original Google Colab runtime:
    next to `app.py`. Follow the project README for dependency installation,
    local startup, and deployment.
 
-If the runtime was lost, first rerun the original notebook with `credit_data.csv`.
-That trains a new instance of the same workflow; its scores may differ because of
+If the runtime was lost, rerunning the original notebook with `credit_data.csv`
+trains a new instance of the same workflow; its scores may differ because of
 unseeded undersampling. The dashboard displays metrics from the actual export.
-This repository intentionally does not supply invented model weights or sample
-transactions that could be mistaken for the user's real dataset.
+Preserve the included rebuilt bundle before intentionally replacing it with an
+export. The supplied data assets contain actual public-dataset transactions,
+rather than generated examples.
 
 ## Exported artifacts
 
@@ -114,16 +138,16 @@ transactions that could be mistaken for the user's real dataset.
 | `artifacts/scaler.pkl` | `None`, saved with joblib: explicit identity preprocessing. |
 | `artifacts/feature_columns.json` | Exact `X.columns` order. |
 | `artifacts/sample_data.csv` | All 492 fraud rows plus up to 5,000 legitimate rows, shuffled with a fixed seed for exploration. |
-| `artifacts/test_data.csv` | Exact original `X_test` and aligned `Y_test`, with target named `Class`. |
+| `artifacts/test_data.csv` | Exact `X_test` and aligned `Y_test` of the exported run, with target named `Class`. The bundled file is the rebuilt run's holdout. |
 | `artifacts/metadata.json` | Full-dataset counts, sample provenance, model settings, split details, metrics, feature defaults/ranges, Python/package versions, and parity-check status. |
 | `artifacts/requirements-model.txt` | Exact numpy, pandas, scipy, scikit-learn, and joblib versions used for serialization. |
-| `artifacts.zip` | Downloadable bundle containing the `artifacts/` directory. |
+| `artifacts.zip` | Optional generated downloadable bundle containing the `artifacts/` directory; not required in the GitHub repository. |
 
 `sample_data.csv` is intentionally **fraud-enriched**, not representative of the
 population. For the provided dataset it has 5,492 rows and approximately 8.96%
 fraud. Its distribution must be labeled as a sample and must not replace the
-full-data overview counts or the original holdout for model evaluation. Only the
-exported holdout is used for performance metrics. All fraud records are in the
+full-data overview counts or the exported run's holdout for model evaluation. Only
+the exported holdout is used for performance metrics. All fraud records are in the
 exploration sample, so that sample overlaps training and test data by design.
 
 The exporter reloads the saved estimator, verifies `scaler.pkl is None`, and checks

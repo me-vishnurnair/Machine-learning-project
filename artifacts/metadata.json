@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-04T20:47:14.098130+00:00",
+  "python_version": "3.12.14",
+  "purpose": "New reproducible training run of the uploaded notebook workflow; original fitted model not recovered.",
+  "model": {
+    "name": "Logistic Regression",
+    "class": "sklearn.linear_model._logistic.LogisticRegression",
+    "parameters": {
+      "C": 1.0,
+      "class_weight": null,
+      "dual": false,
+      "fit_intercept": true,
+      "intercept_scaling": 1,
+      "l1_ratio": 0.0,
+      "max_iter": 100,
+      "n_jobs": null,
+      "penalty": "deprecated",
+      "random_state": null,
+      "solver": "lbfgs",
+      "tol": 0.0001,
+      "verbose": 0,
+      "warm_start": false
+    },
+    "classes": [
+      0,
+      1
+    ]
+  },
+  "dataset": {
+    "name": "ULB Credit Card Fraud Detection (creditcard.csv)",
+    "total_transactions": 284807,
+    "legitimate_count": 284315,
+    "fraud_count": 492,
+    "fraud_percentage": 0.1727485630620034,
+    "feature_count": 30
+  },
+  "preprocessing": {
+    "scaling": "none",
+    "encoding": "none",
+    "balancing": "Random undersampling of legitimate transactions to 492",
+    "feature_order": [
+      "Time",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6",
+      "V7",
+      "V8",
+      "V9",
+      "V10",
+      "V11",
+      "V12",
+      "V13",
+      "V14",
+      "V15",
+      "V16",
+      "V17",
+      "V18",
+      "V19",
+      "V20",
+      "V21",
+      "V22",
+      "V23",
+      "V24",
+      "V25",
+      "V26",
+      "V27",
+      "V28",
+      "Amount"
+    ]
+  },
+  "split": {
+    "train_rows": 787,
+    "test_rows": 197,
+    "test_size": 0.2,
+    "stratified": true,
+    "random_state": 2,
+    "undersampling_random_state": 42
+  },
+  "sample": {
+    "rows": 5492,
+    "legitimate_count": 5000,
+    "fraud_count": 492,
+    "method": "All fraud + up to 5,000 random legitimate transactions",
+    "representative": false
+  },
+  "metrics": {
+    "train_accuracy": 0.9440914866581956,
+    "test_accuracy": 0.9441624365482234,
+    "accuracy": 0.9441624365482234,
+    "precision": 0.967741935483871,
+    "recall": 0.9183673469387755,
+    "f1": 0.9424083769633508,
+    "roc_auc": 0.9735106163677593
+  },
+  "notebook_reported_metrics": {
+    "train_accuracy": 0.9415501905972046,
+    "test_accuracy": 0.9390862944162437
+  },
+  "feature_summary": {
+    "Time": {
+      "median": 84692.0,
+      "min": 0.0,
+      "max": 172792.0
+    },
+    "V1": {
+      "median": 0.0181087991615309,
+      "min": -56.407509631329,
+      "max": 2.45492999121121
+    },
+    "V2": {
+      "median": 0.0654855563960555,
+      "min": -72.7157275629303,
+      "max": 22.0577289904909
+    },
+    "V3": {
+      "median": 0.179846343563544,
+      "min": -48.3255893623954,
+      "max": 9.38255843282114
+    },
+    "V4": {
+      "median": -0.0198465294811989,
+      "min": -5.68317119816995,
+      "max": 16.8753440335975
+    },
+    "V5": {
+      "median": -0.0543358267364858,
+      "min": -113.743306711146,
+      "max": 34.8016658766686
+    },
+    "V6": {
+      "median": -0.274187076506651,
+      "min": -26.1605059358433,
+      "max": 73.3016255459646
+    },
+    "V7": {
+      "median": 0.0401030827945351,
+      "min": -43.5572415712451,
+      "max": 120.589493945238
+    },
+    "V8": {
+      "median": 0.0223580364366631,
+      "min": -73.2167184552674,
+      "max": 20.0072083651213
+    },
+    "V9": {
+      "median": -0.051428731550349,
+      "min": -13.4340663182301,
+      "max": 15.5949946071278
+    },
+    "V10": {
+      "median": -0.0929173835961975,
+      "min": -24.5882624372475,
+      "max": 23.7451361206545
+    },
+    "V11": {
+      "median": -0.032757354499007,
+      "min": -4.79747346479757,
+      "max": 12.0189131816199
+    },
+    "V12": {
+      "median": 0.140032588291332,
+      "min": -18.6837146333443,
+      "max": 7.8483920756446
+    },
+    "V13": {
+      "median": -0.0135680567852071,
+      "min": -5.79188120632084,
+      "max": 7.12688295859376
+    },
+    "V14": {
+      "median": 0.0506013193100486,
+      "min": -19.2143254902614,
+      "max": 10.5267660517847
+    },
+    "V15": {
+      "median": 0.0480715497626106,
+      "min": -4.49894467676621,
+      "max": 8.87774159774277
+    },
+    "V16": {
+      "median": 0.0664133205843014,
+      "min": -14.1298545174931,
+      "max": 17.3151115176278
+    },
+    "V17": {
+      "median": -0.0656757538072252,
+      "min": -25.1627993693248,
+      "max": 9.25352625047285
+    },
+    "V18": {
+      "median": -0.00363631235469926,
+      "min": -9.49874592104677,
+      "max": 5.04106918541184
+    },
+    "V19": {
+      "median": 0.00373482299525741,
+      "min": -7.21352743017759,
+      "max": 5.59197142733558
+    },
+    "V20": {
+      "median": -0.0624810924603664,
+      "min": -54.497720494566,
+      "max": 39.4209042482199
+    },
+    "V21": {
+      "median": -0.0294501676953819,
+      "min": -34.8303821448146,
+      "max": 27.2028391573154
+    },
+    "V22": {
+      "median": 0.00678194252826955,
+      "min": -10.933143697655,
+      "max": 10.5030900899454
+    },
+    "V23": {
+      "median": -0.0111929302967212,
+      "min": -44.8077352037913,
+      "max": 22.5284116897749
+    },
+    "V24": {
+      "median": 0.0409760560572798,
+      "min": -2.83662691870341,
+      "max": 4.58454913689817
+    },
+    "V25": {
+      "median": 0.0165935016367397,
+      "min": -10.2953970749851,
+      "max": 7.51958867870916
+    },
+    "V26": {
+      "median": -0.0521391080182019,
+      "min": -2.60455055280817,
+      "max": 3.5173456116238
+    },
+    "V27": {
+      "median": 0.00134214597865025,
+      "min": -22.5656793207827,
+      "max": 31.6121981061363
+    },
+    "V28": {
+      "median": 0.011243831564982,
+      "min": -15.4300839055349,
+      "max": 33.8478078188831
+    },
+    "Amount": {
+      "median": 22.0,
+      "min": 0.0,
+      "max": 25691.16
+    }
+  },
+  "versions": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "joblib": "1.6.0"
+  },
+  "validation": {
+    "original_holdout_preserved": true,
+    "export_prediction_parity": true,
+    "export_probability_parity": true,
+    "probability_tolerance": {
+      "rtol": 1e-12,
+      "atol": 1e-12
+    }
+  },
+  "model_origin": "rebuilt_from_notebook_workflow",
+  "rebuilding": {
+    "source_url": "https://raw.githubusercontent.com/georgymh/ml-fraud-detection/86864707b1cbaa80415bbc41e39c4f1e4371f932/creditcard.csv.zip",
+    "canonical_source": "https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud",
+    "dataset_sha256": "76274b691b16a6c49d3f159c883398e03ccd6d1ee12d9d8ee38f4b4b98551a89",
+    "undersampling_seed": 42,
+    "split_seed": 2,
+    "original_notebook_unseeded": true,
+    "original_saved_model_recovered": false,
+    "training_warnings": [
+      {
+        "category": "ConvergenceWarning",
+        "message": "lbfgs failed to converge after 100 iteration(s) (status=1):\nSTOP: TOTAL NO. OF ITERATIONS REACHED LIMIT\n\nIncrease the number of iterations to improve the convergence (max_iter=100).\nYou might also want to scale the data as shown in:\n    https://scikit-learn.org/stable/modules/preprocessing.html\nPlease also refer to the documentation for alternative solver options:\n    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression"
+      }
+    ]
+  }
+}
