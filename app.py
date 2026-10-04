@@ -1,7 +1,7 @@
 """Streamlit dashboard for the notebook's credit-card fraud classifier.
 
-The notebook is the source of truth: this app never fits a scaler or model.
-Run ``streamlit run app.py`` after exporting the notebook's artifacts.
+The notebook defines the workflow: this app never fits a scaler or model.
+Run ``streamlit run app.py`` with the bundled or exported trusted artifacts.
 """
 
 from __future__ import annotations
@@ -57,12 +57,13 @@ st.markdown(
     """
     <style>
     .stApp {background: #F7F9FC; color: #182B49;}
-    .block-container {padding-top: 4.8rem; padding-bottom: 3rem; max-width: 1550px;}
+    .block-container {padding-top: 4.5rem; padding-bottom: 3rem; max-width: 1550px;}
     [data-testid="stSidebar"] {background: #FFFFFF; border-right: 1px solid #E6EBF2;}
     h1, h2, h3 {color: #182B49; letter-spacing: -0.035em;}
     [data-testid="stMetric"] {
-        background: #FFFFFF; border: 1px solid #E6EBF2; border-radius: 14px;
+        background: #FFFFFF; border: 1px solid #E6EBF2; border-radius: 16px;
         padding: 18px 20px; min-height: 120px;
+        box-shadow: 0 4px 18px rgba(24, 43, 73, .035);
     }
     [data-testid="stMetricLabel"] {color: #63718A;}
     [data-testid="stMetricValue"] {color: #182B49; font-weight: 650;}
@@ -71,6 +72,31 @@ st.markdown(
     .brand {font-size: 1.55rem; font-weight: 750; color: #182B49; margin: .35rem 0;}
     .brand-dot {color: #128B80;}
     .muted {color: #63718A; font-size: .9rem; line-height: 1.6;}
+    .hero {
+        position: relative; overflow: hidden; isolation: isolate;
+        background: linear-gradient(115deg, #182B49 0%, #203D58 65%, #176B6A 100%);
+        border: 1px solid rgba(255,255,255,.1); border-radius: 22px;
+        padding: 34px 38px; margin: .35rem 0 1.7rem;
+        box-shadow: 0 12px 32px rgba(24, 43, 73, .10);
+    }
+    .hero::after {
+        content: ''; position: absolute; z-index: -1; width: 270px; height: 270px;
+        right: -105px; top: -115px; border-radius: 50%;
+        border: 40px solid rgba(111, 222, 202, .075);
+        box-shadow: 0 0 0 42px rgba(111, 222, 202, .035);
+    }
+    .hero .eyebrow {color: #8DE0D3; margin: 0 0 .8rem;}
+    .hero h1 {color: #FFFFFF; font-size: clamp(1.9rem, 3.1vw, 2.8rem);
+              line-height: 1.13; padding: 0; margin: 0 0 .9rem; max-width: 760px;}
+    .hero p {color: #D8E4EF; max-width: 690px; line-height: 1.6; margin: 0;}
+    .hero-meta {display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px;}
+    .hero-meta span {color: #D7F4EE; border: 1px solid rgba(166, 224, 214, .25);
+                     border-radius: 999px; font-size: .75rem; padding: 5px 11px;}
+    .provenance {color: #63718A; font-size: .78rem; line-height: 1.55;
+                 border-left: 3px solid #128B80; padding-left: 12px; margin-bottom: 16px;}
+    [data-testid="stPlotlyChart"] {background: #FFFFFF; border: 1px solid #E6EBF2;
+                                  border-radius: 16px; overflow: hidden;}
+    [data-testid="stSidebar"] [role="radiogroup"] {gap: .25rem;}
     .result {border-radius: 15px; padding: 25px; border: 1px solid;
              margin-top: 15px; margin-bottom: 20px;}
     .result h2 {margin: 0 0 .4rem; letter-spacing: -.025em;}
@@ -81,6 +107,12 @@ st.markdown(
     .result-legitimate h2 {color: #176047;}
     div.stButton > button[kind="primary"],
     div.stFormSubmitButton > button[kind="primary"] {background: #128B80; border: 0;}
+    @media (max-width: 640px) {
+        .block-container {padding-top: 4.2rem; padding-left: 1.1rem; padding-right: 1.1rem;}
+        .hero {padding: 25px 22px; border-radius: 18px; margin-bottom: 1.2rem;}
+        .hero p {font-size: .9rem;}
+        [data-testid="stMetric"] {padding: 16px 18px; min-height: 105px;}
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -88,7 +120,7 @@ st.markdown(
 
 
 # Cache by both path and file identity, so a fresh notebook export is picked up.
-@st.cache_resource(show_spinner="Loading notebook model…")
+@st.cache_resource(show_spinner="Loading trained model…")
 def cached_artifacts(directory: str, signature: tuple) -> Artifacts:
     return load_artifacts(Path(directory))
 
@@ -105,7 +137,7 @@ def cached_uploaded_csv(content: bytes, require_target: bool = True) -> pd.DataF
     return read_transaction_csv(content, require_target=require_target)
 
 
-@st.cache_data(show_spinner="Evaluating the notebook's held-out transactions…")
+@st.cache_data(show_spinner="Evaluating the saved holdout…")
 def cached_evaluation(
     directory: str,
     signature: tuple,
@@ -208,15 +240,20 @@ def overview_statistics(artifacts: Artifacts | None) -> tuple[dict, bool]:
 
 # Page 1: distinguish full-dataset facts from the smaller exploration sample.
 def render_overview(artifacts: Artifacts | None, data: pd.DataFrame | None, source: str) -> None:
-    page_heading(
-        "Credit card intelligence",
-        "A clearer view of transaction fraud.",
-        "Explore transaction patterns, inspect your notebook's model, and score new transactions.",
+    # A responsive hero gives the project a clear identity without hiding its provenance.
+    st.markdown(
+        '<section class="hero"><div class="eyebrow">Transaction intelligence</div>'
+        '<h1>Credit Card Fraud Detection</h1>'
+        '<p>Explore the patterns. Understand the model. Score the next transaction. '
+        'A complete view of your credit card fraud detection project.</p>'
+        '<div class="hero-meta"><span>30 transaction features</span>'
+        '<span>Logistic Regression</span><span>Notebook workflow preserved</span></div></section>',
+        unsafe_allow_html=True,
     )
     stats, from_export = overview_statistics(artifacts)
-    st.subheader("Exported original dataset" if from_export else "Original dataset · notebook records")
+    st.subheader("Original dataset" if from_export else "Original dataset · notebook records")
     st.caption(
-        "Counts exported from the notebook's complete dataset, before undersampling."
+        "Counts from the complete source dataset, before undersampling."
         if from_export
         else "Counts reported by the supplied notebook, before undersampling. Exported full-dataset counts are not available."
     )
@@ -360,9 +397,9 @@ def render_explorer(data: pd.DataFrame | None, source: str) -> None:
         st.plotly_chart(chart_style(fig, 680), width="stretch", key="correlation_heatmap")
 
 
-# Page 3: metrics are computed exclusively on the original exported holdout.
+# Page 3: metrics are computed exclusively on the model's saved holdout.
 def render_performance(artifacts: Artifacts | None, artifact_dir: Path, signature: tuple, load_error: str | None) -> None:
-    page_heading("Evaluate", "Model performance", "An honest view of the notebook's model on its preserved test split.")
+    page_heading("Evaluate", "Model performance", "Evaluate the trained model on its saved test split, with every score computed directly from the holdout.")
     if artifacts is None:
         a, b = st.columns(2)
         a.metric("Notebook training accuracy", f"{NOTEBOOK_SUMMARY['training_accuracy']:.2%}")
@@ -622,7 +659,8 @@ def main() -> None:
             help="Include all 30 features and Class (0 or 1). This changes exploration only, never holdout evaluation.",
         )
         if artifacts:
-            st.success("Notebook model loaded", icon="✅")
+            rebuilt = artifacts.metadata.get("model_origin") == "rebuilt_from_notebook_workflow"
+            st.success("Rebuilt model loaded" if rebuilt else "Notebook model loaded", icon="✅")
         else:
             st.info("Notebook export needed")
         st.caption("Logistic Regression · 30 features")
@@ -645,9 +683,10 @@ def main() -> None:
     if data_error:
         st.warning(f"Exploration data could not be loaded: {data_error}")
     if artifacts and artifacts.metadata.get("model_origin") == "rebuilt_from_notebook_workflow":
-        st.caption(
-            "Bundled model: a new, reproducible training run of your notebook workflow. "
-            "Recorded notebook accuracy and current model performance are shown separately."
+        st.markdown(
+            '<div class="provenance">Bundled model: a new, reproducible training run of your notebook workflow. '
+            'Recorded notebook accuracy and current model performance are shown separately.</div>',
+            unsafe_allow_html=True,
         )
     if page == "Home / Overview":
         render_overview(artifacts, data, source)
