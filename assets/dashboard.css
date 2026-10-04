@@ -230,12 +230,14 @@ hr {border-color: var(--cv-border); margin: 1.4rem 0;}
 [data-testid="stDownloadButton"] button:hover,
 [data-testid="stFormSubmitButton"] button:hover {border-color: rgba(115, 229, 188, .4); background: #1A2B41; color: #E8F5F0; transform: translateY(-1px);}
 [data-testid="stButton"] button[kind="primary"],
-[data-testid="stFormSubmitButton"] button[kind="primary"] {
+[data-testid="stFormSubmitButton"] button[kind="primary"],
+[data-testid="stFormSubmitButton"] button[kind="primaryFormSubmit"] {
     background: linear-gradient(105deg, #73E5BC, #93EDCE); border: 1px solid rgba(180, 249, 222, .4); color: #0B2925;
     box-shadow: 0 6px 20px -7px rgba(115, 229, 188, .3);
 }
 [data-testid="stButton"] button[kind="primary"]:hover,
-[data-testid="stFormSubmitButton"] button[kind="primary"]:hover {background: linear-gradient(105deg, #91EDCC, #B2F5DF); color: #09231F; box-shadow: 0 9px 25px -6px rgba(115, 229, 188, .3);}
+[data-testid="stFormSubmitButton"] button[kind="primary"]:hover,
+[data-testid="stFormSubmitButton"] button[kind="primaryFormSubmit"]:hover {background: linear-gradient(105deg, #91EDCC, #B2F5DF); color: #09231F; box-shadow: 0 9px 25px -6px rgba(115, 229, 188, .3);}
 .st-key-overview_explore button, .st-key-overview_score button {min-height: 46px; margin-bottom: 6px;}
 button:focus-visible {outline: 2px solid var(--cv-mint); outline-offset: 3px;}
 [data-testid="stNumberInput"] > div, [data-testid="stTextInput"] > div, [data-testid="stSelectbox"] [data-baseweb="select"] > div {background: #101A2B; border-color: rgba(154, 180, 217, .18); border-radius: 9px;}
