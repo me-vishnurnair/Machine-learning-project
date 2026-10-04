@@ -1,0 +1,32 @@
+# Local Python environments, bytecode, and test outputs.
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Notebook-generated files.
+.ipynb_checkpoints/
+
+# Trained exports and transaction data are added only when intentionally deployed.
+artifacts/*
+!artifacts/.gitkeep
+!artifacts/README.md
+*.pkl
+*.joblib
+*.csv
+*.zip
+
+# Local credentials and configuration.
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Editor and operating-system files.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

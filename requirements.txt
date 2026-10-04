@@ -1,0 +1,9 @@
+# Keep the scientific Python versions compatible with the exported model.
+# After exporting from Colab, also install artifacts/requirements-model.txt.
+streamlit==1.65.0
+plotly==6.9.0
+numpy>=1.26,<3
+pandas>=2.1,<4
+scipy>=1.11,<2
+scikit-learn>=1.3,<2
+joblib>=1.3,<2
