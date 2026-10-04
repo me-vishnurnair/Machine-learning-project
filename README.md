@@ -1,8 +1,10 @@
-# Credit Card Fraud Detection Dashboard
+# CreditVault · Credit Card Fraud Detection
 
 **Live dashboard:** [creditvault.streamlit.app](https://creditvault.streamlit.app/)
 
 A complete five-page Streamlit dashboard with a **real fitted Logistic Regression model, transaction sample, and evaluation holdout included**. It provides a project overview, Plotly data exploration, model performance, single-transaction prediction, and CSV batch prediction with downloadable results.
+
+The interface uses a dark mint-and-violet theme, animated card artwork, responsive metric cards, and consistent charts and controls. Motion respects reduced-motion preferences. The sidebar stays collapsed on phones, and example transactions can be downloaded directly from the Batch Prediction page.
 
 The supplied Colab notebook contains code and recorded outputs, but no saved fitted model or source CSV. At the project owner's request, the included model was newly trained from the original public ULB credit-card fraud dataset using the notebook's workflow. It preserves the raw features, their order, random undersampling, train/test split, and default Logistic Regression. The new undersampling seed is `42` so this rebuild is reproducible; the original notebook's undersampling was unseeded. **This is a new training run, not the recovered original Colab model.** No export or dataset upload is needed to run the bundled dashboard.
 
@@ -44,6 +46,8 @@ Machine-learning-project/
 ├── .gitignore
 ├── .streamlit/
 │   └── config.toml                # Theme and server settings
+├── assets/
+│   └── dashboard.css              # Responsive visual system and motion
 ├── docs/
 │   ├── NOTEBOOK_REVIEW.md
 │   └── REBUILT_MODEL.md
