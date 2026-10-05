@@ -26,10 +26,14 @@ PAGES = (
 
 def open_page(artifact_dir, page, monkeypatch):
     monkeypatch.setenv("FRAUD_ARTIFACT_DIR", str(artifact_dir))
+    monkeypatch.setenv("PAYSIM_ARTIFACT_DIR", str(artifact_dir.parent / "missing-transfer-model"))
     app = AppTest.from_file(str(APP_PATH), default_timeout=20).run()
     assert not app.exception
     app.radio(key="navigation").set_value(page).run()
     assert not app.exception
+    if page == "Single Prediction":
+        app.radio(key="prediction_model").set_value("Credit card · notebook").run()
+        assert not app.exception
     return app
 
 

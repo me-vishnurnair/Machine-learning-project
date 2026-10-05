@@ -10,6 +10,8 @@
     --cv-rose: #FF7F98;
     --cv-border: rgba(168, 192, 228, .12);
     --cv-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --cv-ease: cubic-bezier(.22, 1, .36, 1);
+    --cv-entry-delay: 0s;
 }
 
 /* Ambient lighting stays behind the content; it never reduces chart contrast. */
@@ -127,7 +129,7 @@ hr {border-color: var(--cv-border); margin: 1.4rem 0;}
 .workspace-pill {display: inline-flex; align-items: center; gap: 7px; color: #A9B9D0; font-size: .69rem; padding: 6px 11px; border: 1px solid var(--cv-border); border-radius: 7px; background: rgba(17, 26, 43, .6);}
 .status-badge {display: inline-flex; align-items: center; gap: 7px; color: #B3EAD6; font-size: .67rem; font-weight: 550;}
 .status-badge::before {content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--cv-mint); box-shadow: 0 0 10px rgba(115, 229, 188, .4);}
-.page-intro {margin: 1px 0 25px; animation: cv-reveal .6s ease both;}
+.page-intro {margin: 1px 0 25px; animation: cv-reveal .55s var(--cv-ease) backwards;}
 .page-intro h1 {font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.18; padding: 0; margin: 0 0 10px;}
 .eyebrow, .section-kicker {color: var(--cv-mint); font-weight: 650; font-size: .64rem; letter-spacing: .17em; text-transform: uppercase; margin-bottom: 10px;}
 .section-kicker {color: #879CB8; margin-top: 8px; margin-bottom: 13px;}
@@ -143,7 +145,7 @@ hr {border-color: var(--cv-border); margin: 1.4rem 0;}
                 radial-gradient(ellipse at 60% 110%, rgba(165, 148, 255, .12), transparent 63%),
                 linear-gradient(122deg, #142039, #111B2D 58%, #101D2C);
     box-shadow: 0 24px 60px -26px rgba(0, 0, 0, .65), inset 0 1px 0 rgba(217, 236, 255, .045);
-    animation: cv-reveal .7s ease both;
+    animation: cv-reveal .65s var(--cv-ease) backwards;
 }
 .hero::before {content: ""; position: absolute; z-index: -1; inset: 0; background-image: linear-gradient(rgba(185, 216, 237, .025) 1px, transparent 1px), linear-gradient(90deg, rgba(185, 216, 237, .025) 1px, transparent 1px); background-size: 42px 42px; mask-image: linear-gradient(90deg, transparent, black);}
 .hero-content {position: relative; z-index: 2; max-width: 620px;}
@@ -197,6 +199,7 @@ hr {border-color: var(--cv-border); margin: 1.4rem 0;}
     border: 1px solid var(--cv-border); border-radius: 14px; padding: 21px 22px; min-height: 117px;
     box-shadow: 0 10px 26px -18px rgba(0, 0, 0, .5);
     transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+    animation: cv-panel-in .5s var(--cv-ease) var(--cv-entry-delay) backwards;
 }
 [data-testid="stMetric"]::before {content: ""; position: absolute; height: 2px; width: 53px; top: 0; left: 22px; background: linear-gradient(90deg, var(--cv-mint), transparent); opacity: .7;}
 [data-testid="stMetric"]:hover {transform: translateY(-3px); border-color: rgba(115, 229, 188, .24); box-shadow: 0 15px 28px -18px rgba(0, 0, 0, .65);}
@@ -207,6 +210,7 @@ hr {border-color: var(--cv-border); margin: 1.4rem 0;}
     position: relative; height: 100%; padding: 23px 24px; border: 1px solid var(--cv-border); border-radius: 15px;
     background: linear-gradient(130deg, rgba(22, 34, 54, .92), rgba(16, 25, 41, .97));
     transition: transform .22s ease, border-color .22s ease;
+    animation: cv-panel-in .55s var(--cv-ease) var(--cv-entry-delay) backwards;
 }
 .insight-card:hover, .step-card:hover {transform: translateY(-3px); border-color: rgba(165, 148, 255, .28);}
 .insight-card .eyebrow {color: #9EACC4; font-size: .61rem;}
@@ -222,6 +226,7 @@ hr {border-color: var(--cv-border); margin: 1.4rem 0;}
 [data-testid="stButton"] button,
 [data-testid="stDownloadButton"] button,
 [data-testid="stFormSubmitButton"] button {
+    position: relative; overflow: hidden;
     border-radius: 9px; min-height: 43px; font-weight: 600; font-size: .82rem;
     border-color: rgba(159, 187, 224, .19); background: #142035; color: #C9D7EA;
     transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
@@ -272,7 +277,7 @@ button:focus-visible {outline: 2px solid var(--cv-mint); outline-offset: 3px;}
 [data-testid="stPlotlyChart"] .modebar-btn:hover path {fill: var(--cv-mint) !important;}
 
 /* Predictions communicate the outcome through text and colour together. */
-.result {padding: 27px; border: 1px solid; border-radius: 16px; margin: 14px 0 20px;}
+.result {position: relative; overflow: hidden; padding: 27px; border: 1px solid; border-radius: 16px; margin: 14px 0 20px; animation: cv-result-in .6s var(--cv-ease) backwards;}
 .result h2 {font-size: 1.6rem; margin: 0 0 8px; padding: 0; letter-spacing: -.035em;}
 .result p {font-size: .83rem; line-height: 1.7; margin: 0;}
 .result-fraud {background: linear-gradient(125deg, rgba(132, 44, 72, .18), rgba(55, 25, 43, .38)); border-color: rgba(255, 127, 152, .29); color: #EDB7C5;}
@@ -282,8 +287,91 @@ button:focus-visible {outline: 2px solid var(--cv-mint); outline-offset: 3px;}
 .footer {display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; color: #647995; font-size: .65rem; line-height: 1.8; margin-top: 28px; padding-top: 19px; border-top: 1px solid var(--cv-border);}
 .footer span {color: #8093AE;}
 
+/* Entries follow the reading order. Only opacity and small transforms animate. */
+[data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(1) {--cv-entry-delay: .04s;}
+[data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(2) {--cv-entry-delay: .1s;}
+[data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(3) {--cv-entry-delay: .16s;}
+[data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(4) {--cv-entry-delay: .22s;}
+[data-testid="stHorizontalBlock"] > [data-testid="stColumn"]:nth-child(5) {--cv-entry-delay: .28s;}
+.hero-content > .hero-kicker {animation: cv-reveal .5s var(--cv-ease) .06s backwards;}
+.hero-content > .hero-title {animation: cv-reveal .6s var(--cv-ease) .1s backwards;}
+.hero-content > .hero-copy {animation: cv-reveal .6s var(--cv-ease) .16s backwards;}
+.hero-meta {animation: cv-reveal .6s var(--cv-ease) .22s backwards;}
+[data-testid="stTabs"] [role="tabpanel"],
+[data-testid="stExpander"] details[open] [data-testid="stExpanderDetails"] {
+    animation: cv-panel-in .35s var(--cv-ease) backwards;
+}
+
+/* Controls respond to intent. The sheen runs once per hover, not continuously. */
+[data-testid="stButton"] button:not(:disabled):active,
+[data-testid="stDownloadButton"] button:not(:disabled):active,
+[data-testid="stFormSubmitButton"] button:not(:disabled):active {
+    transform: translateY(1px) scale(.985); transition-duration: .08s;
+}
+[data-testid="stButton"] button[kind="primary"]::after,
+[data-testid="stFormSubmitButton"] button[kind="primary"]::after,
+[data-testid="stFormSubmitButton"] button[kind="primaryFormSubmit"]::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, .22) 50%, transparent 65%);
+    transform: translateX(-110%); opacity: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+    [data-testid="stButton"] button[kind="primary"]:not(:disabled):hover::after,
+    [data-testid="stFormSubmitButton"] button[kind="primary"]:not(:disabled):hover::after,
+    [data-testid="stFormSubmitButton"] button[kind="primaryFormSubmit"]:not(:disabled):hover::after {
+        animation: cv-button-sheen .6s var(--cv-ease);
+    }
+    [data-testid="stSidebar"] [data-testid="stRadioOption"]:hover {transform: translateX(2px);}
+}
+[data-testid="stSidebar"] [data-testid="stRadioOption"] {transition: transform .2s var(--cv-ease), background .2s ease, border-color .2s ease, color .2s ease;}
+[data-testid="stButton"] button:disabled,
+[data-testid="stDownloadButton"] button:disabled,
+[data-testid="stFormSubmitButton"] button:disabled {transform: none; box-shadow: none; cursor: not-allowed;}
+[data-testid="stNumberInput"] > div,
+[data-testid="stTextInput"] > div,
+[data-testid="stSelectbox"] [data-baseweb="select"] > div,
+[data-testid="stMultiSelect"] [data-baseweb="select"] > div {
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+[data-testid="stSelectbox"] [data-baseweb="select"]:focus-within > div,
+[data-testid="stMultiSelect"] [data-baseweb="select"]:focus-within > div {
+    border-color: var(--cv-mint); box-shadow: 0 0 0 2px rgba(115, 229, 188, .12);
+}
+[data-testid="stTabs"] [role="tab"] {transition: color .18s ease, background .18s ease; border-radius: 5px 5px 0 0;}
+[data-testid="stTabs"] [role="tab"]:focus-visible,
+[data-testid="stExpander"] summary:focus-visible {
+    outline: 2px solid var(--cv-mint); outline-offset: 3px;
+}
+[data-testid="stTabs"] [data-baseweb="tab-highlight"] {transition: transform .25s var(--cv-ease);}
+[data-testid="stFileUploaderDropzone"]:focus-within {border-color: var(--cv-mint); box-shadow: 0 0 0 2px rgba(115, 229, 188, .1);}
+
+/* Easy transaction form: the account flow is a visual summary of the entered values. */
+.transaction-context {padding: 19px 21px; border: 1px solid var(--cv-border); border-radius: 13px; background: linear-gradient(120deg, rgba(115, 229, 188, .055), rgba(165, 148, 255, .035)); margin: 3px 0 20px; animation: cv-panel-in .5s var(--cv-ease) backwards;}
+.transaction-context h3 {margin: 0 0 7px; font-size: .93rem;}
+.transaction-context p {color: var(--cv-muted); font-size: .79rem; line-height: 1.7; margin: 0;}
+.flow-summary {display: grid; grid-template-columns: minmax(0, 1fr) 38px minmax(0, 1fr); align-items: center; gap: 15px; margin: 15px 0 21px;}
+.flow-account {min-width: 0; border-radius: 12px; border: 1px solid var(--cv-border); padding: 17px 19px; background: rgba(17, 26, 43, .78); animation: cv-panel-in .5s var(--cv-ease) backwards;}
+.flow-account:last-child {animation-delay: .08s;}
+.flow-account h3 {font-size: .84rem; margin: 0 0 12px;}
+.flow-account strong {color: #E7EEF8; font-size: 1.1rem; font-weight: 620; letter-spacing: -.025em; overflow-wrap: anywhere;}
+.flow-account p {color: var(--cv-muted); font-size: .74rem; line-height: 1.6; margin: 6px 0 0;}
+.flow-arrow {display: flex; justify-content: center; align-items: center; width: 38px; height: 38px; border-radius: 50%; color: var(--cv-mint); font-size: 1.15rem; background: rgba(115, 229, 188, .07); border: 1px solid rgba(115, 229, 188, .15);}
+.balance-label {display: block; color: #8FA3BF; font-size: .63rem; font-weight: 550; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 6px;}
+.mode-note, .demo-note {color: #A0B0C7; font-size: .75rem; line-height: 1.75; border-left: 2px solid rgba(165, 148, 255, .5); padding: 3px 0 3px 12px; margin: 13px 0 17px;}
+.mode-note strong, .demo-note strong {color: #D0C6FA; font-weight: 550;}
+.result-badge {display: inline-flex; align-items: center; gap: 6px; font-size: .61rem; font-weight: 650; letter-spacing: .09em; text-transform: uppercase; border: 1px solid currentColor; border-radius: 6px; padding: 5px 8px; margin-bottom: 13px;}
+.score-details {display: flex; flex-wrap: wrap; gap: 16px 25px; border-top: 1px solid rgba(161, 190, 211, .16); margin-top: 18px; padding-top: 15px;}
+.score-details > div {font-size: .76rem; line-height: 1.65;}
+.score-details strong {font-weight: 600; color: #E7EEF8;}
+.step-progress {display: flex; flex-wrap: wrap; align-items: center; gap: 8px; color: #97ABC7; font-size: .66rem; font-weight: 550; letter-spacing: .015em; margin: 0 0 17px;}
+.step-progress > span {padding: 5px 9px; border-radius: 6px; border: 1px solid var(--cv-border); background: rgba(17, 26, 43, .65);}
+.step-progress > [aria-current="step"] {color: #B5EAD5; border-color: rgba(115, 229, 188, .23); background: rgba(115, 229, 188, .07);}
+
 /* A few quiet transitions add depth without distracting from data. */
 @keyframes cv-reveal {from {opacity: 0; transform: translateY(9px);} to {opacity: 1; transform: translateY(0);}}
+@keyframes cv-panel-in {from {opacity: 0; transform: translateY(7px);} to {opacity: 1; transform: translateY(0);}}
+@keyframes cv-result-in {from {opacity: 0; transform: translateY(12px) scale(.985);} to {opacity: 1; transform: translateY(0) scale(1);}}
+@keyframes cv-button-sheen {0% {opacity: 0; transform: translateX(-110%);} 15% {opacity: 1;} 100% {opacity: 0; transform: translateX(110%);}}
 @keyframes cv-orbit {from {transform: rotate(-25deg);} to {transform: rotate(335deg);}}
 @keyframes cv-card-float {0%, 100% {transform: translateY(0) rotate(-10deg);} 50% {transform: translateY(-7px) rotate(-8deg);}}
 
@@ -327,7 +415,30 @@ button:focus-visible {outline: 2px solid var(--cv-mint); outline-offset: 3px;}
     [data-testid="stForm"] {padding: 17px;}
     [data-testid="stFileUploaderDropzone"] {padding: 17px;}
     .result {padding: 22px;}
+    .transaction-context {padding: 16px 17px; margin-bottom: 17px;}
+    .flow-summary {grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr); gap: 8px; margin: 13px 0 17px;}
+    .flow-account {padding: 14px 12px; border-radius: 10px;}
+    .flow-account h3 {font-size: .74rem; margin-bottom: 9px;}
+    .flow-account strong {font-size: .91rem;}
+    .flow-account p {font-size: .67rem;}
+    .flow-arrow {width: 28px; height: 28px; font-size: .95rem;}
+    .balance-label {font-size: .56rem; letter-spacing: .045em;}
+    .score-details {gap: 12px 18px;}
+    .mode-note, .demo-note {font-size: .71rem;}
     .footer {font-size: .61rem; margin-top: 22px;}
+}
+/* Touch interactions use the press state, avoiding persistent hover lift or shine. */
+@media (hover: none) {
+    [data-testid="stMetric"]:hover, .insight-card:hover, .step-card:hover {transform: none; border-color: var(--cv-border);}
+    [data-testid="stMetric"]:hover {box-shadow: 0 10px 26px -18px rgba(0, 0, 0, .5);}
+    [data-testid="stButton"] button:hover,
+    [data-testid="stDownloadButton"] button:hover,
+    [data-testid="stFormSubmitButton"] button:hover {transform: none; background: #142035; border-color: rgba(159, 187, 224, .19); color: #C9D7EA;}
+    [data-testid="stButton"] button[kind="primary"]:hover,
+    [data-testid="stFormSubmitButton"] button[kind="primary"]:hover,
+    [data-testid="stFormSubmitButton"] button[kind="primaryFormSubmit"]:hover {background: linear-gradient(105deg, #73E5BC, #93EDCE); border-color: rgba(180, 249, 222, .4); color: #0B2925; box-shadow: 0 6px 20px -7px rgba(115, 229, 188, .3);}
+    [data-testid="stSidebar"] [data-testid="stRadioOption"]:hover {transform: none;}
+    [data-testid="stSidebar"] [data-testid="stRadioOption"]:not([data-selected="true"]):hover {background: transparent; color: #A3B2C9;}
 }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {animation: none !important; transition: none !important; scroll-behavior: auto !important;}

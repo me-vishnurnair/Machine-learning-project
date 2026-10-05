@@ -30,6 +30,16 @@ from fraud_core import (
     read_transaction_csv,
     resolve_artifact_dir,
 )
+from paysim_core import (
+    PAYSIM_FEATURE_COLUMNS,
+    PAYSIM_TRANSACTION_TYPES,
+    PaySimArtifacts,
+    load_paysim_artifacts,
+    paysim_artifact_signature,
+    predict_paysim_transactions,
+    read_paysim_csv,
+    resolve_paysim_artifact_dir,
+)
 
 
 # Shared visual language and page configuration.
@@ -54,6 +64,7 @@ PAGES = (
     "Single Prediction",
     "Batch Prediction",
 )
+PREDICTION_MODES = ("Transfers · easy form", "Credit card · notebook")
 
 # Keep the visual system separate from prediction and evaluation code.
 STYLE_PATH = Path(__file__).resolve().parent / "assets" / "dashboard.css"
@@ -64,6 +75,16 @@ st.markdown(f"<style>{STYLE_PATH.read_text(encoding='utf-8')}</style>", unsafe_a
 @st.cache_resource(show_spinner="Loading trained model…")
 def cached_artifacts(directory: str, signature: tuple) -> Artifacts:
     return load_artifacts(Path(directory))
+
+
+@st.cache_resource(show_spinner="Loading transfer model…")
+def cached_paysim_artifacts(directory: str, signature: tuple) -> PaySimArtifacts:
+    return load_paysim_artifacts(Path(directory))
+
+
+@st.cache_data(show_spinner=False)
+def cached_paysim_csv(path: str, modified_ns: int, size: int) -> pd.DataFrame:
+    return read_paysim_csv(Path(path).read_bytes(), require_target=True)
 
 
 @st.cache_data(show_spinner=False)
@@ -240,12 +261,18 @@ def render_overview(artifacts: Artifacts | None, data: pd.DataFrame | None, sour
         st.button("Score a transaction", icon=":material/shield:", width="stretch",
                   on_click=navigate_to, args=("Single Prediction",), key="overview_score")
     model_provenance(artifacts)
+    st.markdown(
+        '<div class="mode-note"><strong>Two ways to explore fraud.</strong> '
+        'The notebook dataset below powers credit-card analysis. Single Prediction also offers '
+        'a separate PaySim model for transaction type, amount, and account balances.</div>',
+        unsafe_allow_html=True,
+    )
 
     stats, from_export = overview_statistics(artifacts)
     st.markdown('<div class="section-kicker">01 / THE DATASET</div>', unsafe_allow_html=True)
-    st.subheader("The full picture, at a glance.")
+    st.subheader("The credit-card dataset, at a glance.")
     st.caption(
-        "Original source dataset · before undersampling"
+        "Credit-card notebook · original source dataset · before undersampling"
         if from_export else "Original dataset counts recorded in the notebook · before undersampling"
     )
     show_dataset_metrics(stats)
@@ -377,8 +404,18 @@ def render_explorer(data: pd.DataFrame | None, source: str) -> None:
 
 
 # Page 3: metrics are computed exclusively on the model's saved holdout.
-def render_performance(artifacts: Artifacts | None, artifact_dir: Path, signature: tuple, load_error: str | None) -> None:
+def render_performance(
+    artifacts: Artifacts | None, artifact_dir: Path, signature: tuple,
+    load_error: str | None, paysim: PaySimArtifacts | None, paysim_error: str | None,
+) -> None:
     page_heading("Model intelligence", "Performance, in perspective.", "Every metric comes from the model’s saved holdout. Explore the results behind its decisions.")
+    model_mode = st.radio(
+        "Evaluation model", (PREDICTION_MODES[1], PREDICTION_MODES[0]),
+        horizontal=True, key="performance_model", label_visibility="collapsed",
+    )
+    if model_mode == PREDICTION_MODES[0]:
+        render_paysim_performance(paysim, paysim_error)
+        return
     if artifacts is None:
         a, b = st.columns(2)
         a.metric("Notebook training accuracy", f"{NOTEBOOK_SUMMARY['training_accuracy']:.2%}")
@@ -451,7 +488,7 @@ def render_performance(artifacts: Artifacts | None, artifact_dir: Path, signatur
         }]),
         hide_index=True, width="stretch",
     )
-    st.caption("The notebook trains one model, so there is no multi-model comparison. Re-running its unseeded undersampling can change results from the recorded notebook output.")
+    st.caption("The notebook trains one model. The separate PaySim transfer classifier has a different dataset and input schema; its scores are shown under its own model tab.")
     if rebuilt:
         details = artifacts.metadata.get("rebuilding", {})
         with st.expander("Training & evaluation context"):
@@ -463,6 +500,81 @@ def render_performance(artifacts: Artifacts | None, artifact_dir: Path, signatur
                 st.write("The raw-feature solver reached the notebook’s default 100-iteration limit. Original preprocessing and estimator settings were retained.")
                 st.code(warning.get("message", ""), language="text")
     probability_note()
+
+
+def render_paysim_performance(artifacts: PaySimArtifacts | None, load_error: str | None) -> None:
+    """Read the complete holdout report, never recompute it on the preview CSV."""
+    if artifacts is None:
+        st.info("The transfer model is not available. You can still evaluate the credit-card notebook model.")
+        if load_error:
+            with st.expander("Transfer model setup details"):
+                st.caption(load_error)
+        return
+    metrics = artifacts.metadata.get("metrics", {})
+    fields = ("accuracy", "precision", "recall", "f1", "roc_auc")
+    if not isinstance(metrics, dict) or not all(field in metrics for field in fields):
+        st.warning("The saved PaySim holdout report is incomplete. Rebuild its model bundle to restore evaluation.")
+        return
+    st.markdown(
+        '<div class="mode-note"><strong>PaySim · simulated mobile-money transactions.</strong> '
+        'A separately trained classifier for the six-field transfer form. These results describe '
+        'its own held-out data and are independent of the credit-card notebook.</div>',
+        unsafe_allow_html=True,
+    )
+    count = metrics.get("sample_count", artifacts.metadata.get("split", {}).get("test_rows"))
+    st.caption(f"HistGradientBoostingClassifier · {int(count):,} held-out PaySim transactions" if count else "HistGradientBoostingClassifier · saved full PaySim holdout")
+    labels = ("Accuracy", "Precision", "Recall", "F1 score", "ROC-AUC")
+    for column, label, field in zip(st.columns(5), labels, fields):
+        value = metrics[field]
+        column.metric(label, "N/A" if value is None else f"{value:.5f}" if field == "roc_auc" else f"{value:.2%}")
+    st.caption("Fraud is the positive class. Labels come from the saved pipeline’s predict() method. The bundled preview CSV is not the full evaluation set.")
+    left, right = st.columns(2, gap="large")
+    with left:
+        st.subheader("Confusion matrix")
+        matrix = np.asarray(metrics.get("confusion_matrix", []))
+        if matrix.shape == (2, 2):
+            fig = go.Figure(go.Heatmap(
+                z=matrix, x=["Predicted legitimate", "Predicted fraud"],
+                y=["Actual legitimate", "Actual fraud"], text=matrix, texttemplate="%{text}",
+                colorscale=[[0, "#172D34"], [1, "#247961"]],
+                textfont={"color": "#FFFFFF", "size": 24}, showscale=False,
+                hovertemplate="%{y}<br>%{x}<br>Transactions: %{z:,}<extra></extra>",
+            ))
+            fig.update_yaxes(autorange="reversed")
+            st.plotly_chart(chart_style(fig), width="stretch", theme=None, key="paysim_confusion_matrix")
+        else:
+            st.info("The saved holdout report has no confusion matrix.")
+    with right:
+        st.subheader("ROC curve")
+        curve = metrics.get("roc_curve")
+        if isinstance(curve, dict) and metrics["roc_auc"] is not None:
+            # Keep a large full-holdout report responsive on phones. The AUC is
+            # still the exact saved value; only the plotted coordinates shrink.
+            indices = np.unique(np.linspace(0, len(curve["fpr"]) - 1, min(2000, len(curve["fpr"])), dtype=int))
+            display_fpr = np.asarray(curve["fpr"])[indices]
+            display_tpr = np.asarray(curve["tpr"])[indices]
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(
+                x=display_fpr, y=display_tpr, mode="lines",
+                name=f"PaySim (AUC {metrics['roc_auc']:.5f})",
+                line={"color": VIOLET, "width": 3}, fill="tozeroy", fillcolor="rgba(165,148,255,.08)",
+            ))
+            fig.add_trace(go.Scatter(x=[0, 1], y=[0, 1], name="Random baseline", mode="lines", line={"color": GRAY, "dash": "dash"}))
+            fig.update_xaxes(title="False positive rate", range=[0, 1])
+            fig.update_yaxes(title="True positive rate", range=[0, 1.02])
+            st.plotly_chart(chart_style(fig), width="stretch", theme=None, key="paysim_roc_curve")
+            if len(curve["fpr"]) > len(indices):
+                st.caption("ROC coordinates are sampled for a responsive chart. ROC-AUC above uses the complete holdout.")
+        else:
+            st.info("The saved holdout report has no ROC curve.")
+    st.subheader("Model summary")
+    st.dataframe(pd.DataFrame([{
+        "Model": "HistGradientBoostingClassifier", "Dataset": "PaySim simulated transactions",
+        "Input features": len(PAYSIM_FEATURE_COLUMNS),
+        "Preprocessing": "One-hot transaction type · raw numeric amounts and balances",
+        "Evaluation": "Separate full held-out PaySim report",
+    }]), hide_index=True, width="stretch")
+    st.caption("These metrics do not establish how the model performs on real bank transactions. Fraud probabilities are uncalibrated model scores.")
 
 
 def feature_defaults(artifacts: Artifacts, data: pd.DataFrame | None) -> dict[str, float]:
@@ -504,9 +616,148 @@ def probability_gauge(probability: float) -> go.Figure:
     return chart_style(fig, 280)
 
 
-# Page 4: pass all raw inputs through the exported preprocessing contract.
-def render_single(artifacts: Artifacts | None, data: pd.DataFrame | None, load_error: str | None) -> None:
-    page_heading("Transaction intelligence", "One transaction. A clearer decision.", "Enter a transaction’s original feature values and inspect its model fraud score.")
+# Page 4: each form routes only to the model trained on that input schema.
+def render_single(
+    artifacts: Artifacts | None, data: pd.DataFrame | None, load_error: str | None,
+    paysim: PaySimArtifacts | None, paysim_error: str | None,
+) -> None:
+    page_heading("Transaction intelligence", "A few details. A clearer decision.", "Analyze a completed transaction using its type, amount, and account balances, or inspect an original credit-card feature vector.")
+    mode = st.radio(
+        "Prediction model", PREDICTION_MODES, horizontal=True,
+        key="prediction_model", label_visibility="collapsed",
+    )
+    if mode == PREDICTION_MODES[0]:
+        render_transfer_single(paysim, paysim_error)
+    else:
+        render_notebook_single(artifacts, data, load_error)
+
+
+def set_transfer_example(values: dict) -> None:
+    """Load an actual labeled sample before the form widgets are recreated."""
+    for name in PAYSIM_FEATURE_COLUMNS:
+        st.session_state[f"transfer_{name}"] = values[name]
+
+
+def transfer_samples(artifacts: PaySimArtifacts) -> pd.DataFrame | None:
+    path = artifacts.directory / "sample_data.csv"
+    try:
+        if path.is_file():
+            stat = path.stat()
+            return cached_paysim_csv(str(path), stat.st_mtime_ns, stat.st_size)
+    except (DataValidationError, OSError, ValueError):
+        # Example rows are optional; their absence does not disable the model.
+        return None
+    return None
+
+
+def render_transfer_single(artifacts: PaySimArtifacts | None, load_error: str | None) -> None:
+    st.markdown(
+        '<div class="mode-note"><strong>Simple inputs. A separate trained model.</strong> '
+        'Transaction type, amount, and before/after balances are scored by a PaySim classifier '
+        'trained on simulated mobile-money transactions.</div>', unsafe_allow_html=True,
+    )
+    if artifacts is None:
+        st.info("The transfer model is not available yet. Choose Credit card · notebook to use the original model.")
+        if load_error:
+            with st.expander("Transfer model setup details"):
+                st.caption(load_error)
+        return
+
+    defaults = {
+        "type": "TRANSFER", "amount": 1000.0, "oldbalanceOrg": 10000.0,
+        "newbalanceOrig": 9000.0, "oldbalanceDest": 0.0, "newbalanceDest": 1000.0,
+    }
+    samples = transfer_samples(artifacts)
+    if samples is not None:
+        legitimate = samples.loc[samples["isFraud"].eq(0)]
+        if not legitimate.empty:
+            transfer_rows = legitimate.loc[legitimate["type"].eq("TRANSFER")]
+            first = (transfer_rows if not transfer_rows.empty else legitimate).iloc[0]
+            defaults = {name: str(first[name]) if name == "type" else float(first[name]) for name in PAYSIM_FEATURE_COLUMNS}
+        left, right = st.columns(2, gap="small")
+        for column, label, row_class in ((left, "Load legitimate sample", 0), (right, "Load fraud sample", 1)):
+            candidates = samples.loc[samples["isFraud"].eq(row_class)]
+            if not candidates.empty:
+                first = candidates.iloc[0]
+                values = {name: str(first[name]) if name == "type" else float(first[name]) for name in PAYSIM_FEATURE_COLUMNS}
+                column.button(label, key=f"transfer_example_{row_class}", width="stretch",
+                              icon=":material/science:", on_click=set_transfer_example, args=(values,))
+        st.caption("Sample buttons load actual labeled PaySim rows. Their recorded class may differ from a model prediction.")
+
+    for name, value in defaults.items():
+        st.session_state.setdefault(f"transfer_{name}", value)
+    st.markdown(
+        '<div class="transaction-context"><h3>Transfer analysis</h3>'
+        '<p>Six recorded values. One clear model result.</p></div>',
+        unsafe_allow_html=True,
+    )
+    with st.form("transfer_prediction_form"):
+        detail_type, detail_amount = st.columns(2, gap="medium")
+        with detail_type:
+            transaction_type = st.selectbox(
+                "Transaction type", PAYSIM_TRANSACTION_TYPES, key="transfer_type",
+                help="PaySim supports transfers, cash withdrawals/deposits, debit, and payments.",
+            )
+        with detail_amount:
+            amount = st.number_input(
+                "Amount", min_value=0.0, step=100.0, format="%.2f", key="transfer_amount",
+                help="Use the same currency unit for the amount and every balance.",
+            )
+        sender, receiver = st.columns(2, gap="large")
+        with sender:
+            st.markdown('<div class="section-kicker">SENDER ACCOUNT</div>', unsafe_allow_html=True)
+            sender_before = st.number_input("Sender initial balance", min_value=0.0, step=100.0, format="%.2f", key="transfer_oldbalanceOrg")
+            sender_after = st.number_input("Sender new balance", min_value=0.0, step=100.0, format="%.2f", key="transfer_newbalanceOrig")
+        with receiver:
+            st.markdown('<div class="section-kicker">RECEIVER ACCOUNT</div>', unsafe_allow_html=True)
+            receiver_before = st.number_input("Receiver initial balance", min_value=0.0, step=100.0, format="%.2f", key="transfer_oldbalanceDest")
+            receiver_after = st.number_input("Receiver new balance", min_value=0.0, step=100.0, format="%.2f", key="transfer_newbalanceDest")
+        st.caption("Enter the recorded balances. Zero balances are accepted; PaySim sometimes omits destination balances. Values use dataset currency units.")
+        submitted = st.form_submit_button(
+            "Analyze transaction", type="primary", icon=":material/auto_awesome:", width="stretch",
+        )
+    if submitted:
+        inputs = dict(zip(PAYSIM_FEATURE_COLUMNS, (
+            transaction_type, amount, sender_before, sender_after, receiver_before, receiver_after,
+        )))
+        try:
+            with st.spinner("Analyzing the transaction…"):
+                result = predict_paysim_transactions(pd.DataFrame([inputs]), artifacts).iloc[0]
+        except (ArtifactError, DataValidationError, ValueError) as exc:
+            st.error(f"This transaction could not be scored: {exc}")
+            return
+        fraud = bool(result["Predicted_Class"])
+        probability = float(result["Fraud_Probability"])
+        label = "Fraudulent" if fraud else "Legitimate"
+        color_class = "result-fraud" if fraud else "result-legitimate"
+        result_col, gauge_col = st.columns([1, 1.1], gap="large")
+        with result_col:
+            st.markdown(
+                f'<div class="result {color_class}"><span class="result-badge">PAYSIM MODEL RESULT</span>'
+                f'<h2>{label}</h2><p>The transfer classifier predicts this transaction as {label.lower()}.</p>'
+                f'<p class="score-details">Fraud probability: <strong>{probability:.2%}</strong></p></div>',
+                unsafe_allow_html=True,
+            )
+            st.caption("Classification uses the trained pipeline’s decision rule. The fraud probability is an uncalibrated model score, not confirmation of fraud.")
+        with gauge_col:
+            st.plotly_chart(probability_gauge(probability), width="stretch", theme=None, key="transfer_probability_gauge")
+        st.markdown(
+            '<div class="flow-summary"><div class="flow-account"><span class="balance-label">SENDER</span>'
+            f'<strong>{sender_before:,.2f} → {sender_after:,.2f}</strong></div>'
+            '<div class="flow-arrow" aria-hidden="true">→</div>'
+            '<div class="flow-account"><span class="balance-label">RECEIVER</span>'
+            f'<strong>{receiver_before:,.2f} → {receiver_after:,.2f}</strong></div></div>',
+            unsafe_allow_html=True,
+        )
+        st.caption(f"{transaction_type} · amount {amount:,.2f} · observed balances before → after")
+    st.markdown(
+        '<div class="demo-note">Demo context · PaySim is simulated mobile-money data. '
+        'This form uses its own trained model; it does not map account balances to the notebook’s anonymized V1–V28 values.</div>',
+        unsafe_allow_html=True,
+    )
+
+
+def render_notebook_single(artifacts: Artifacts | None, data: pd.DataFrame | None, load_error: str | None) -> None:
     if artifacts is None:
         setup_notice(load_error)
         return
@@ -563,7 +814,7 @@ def render_batch(artifacts: Artifacts | None, load_error: str | None) -> None:
     if artifacts is None:
         setup_notice(load_error)
         return
-    st.caption("Include all 30 named features. CSV column order is normalized to the notebook's order; extra columns are preserved and Class is optional.")
+    st.caption("Credit-card notebook model · include all 30 named features. CSV column order is normalized to the notebook's order; extra columns are preserved and Class is optional.")
     with st.expander("Required CSV columns"):
         st.code(",".join(FEATURE_COLUMNS), language="text")
         st.caption("Each feature must contain finite numeric values, with no missing values. An empty upload cannot be scored.")
@@ -638,6 +889,15 @@ def main() -> None:
     except (ArtifactError, OSError, ValueError) as exc:
         signature = ()
         load_error = str(exc)
+    # The independent transfer bundle never changes the notebook's preprocessing.
+    paysim = None
+    paysim_error = None
+    try:
+        transfer_dir = resolve_paysim_artifact_dir()
+        transfer_signature = paysim_artifact_signature(transfer_dir)
+        paysim = cached_paysim_artifacts(str(transfer_dir), transfer_signature)
+    except (ArtifactError, OSError, ValueError) as exc:
+        paysim_error = str(exc)
 
     with st.sidebar:
         st.markdown(
@@ -662,18 +922,24 @@ def main() -> None:
                 st.caption("New training run · original notebook workflow")
         else:
             st.info("Notebook export needed")
+        if paysim:
+            st.success("Transfer model loaded", icon=":material/check_circle:")
+            st.caption("PaySim · simulated mobile-money transactions")
         st.markdown(
             '<div class="sidebar-note"><span>MODEL CONTRACT</span>'
-            '<strong>Logistic Regression</strong><p>30 raw features<br>Original preprocessing preserved</p></div>',
+            '<strong>Credit card · notebook</strong><p>30 raw features · Logistic Regression<br>Original preprocessing preserved</p>'
+            + ('<strong>Transfers · easy form</strong><p>6 fields · separate PaySim classifier</p>' if paysim else '')
+            + '</div>',
             unsafe_allow_html=True,
         )
 
-    ready = artifacts is not None
+    ready = artifacts is not None or paysim is not None
+    ready_label = "2 MODELS READY" if artifacts is not None and paysim is not None else "MODEL READY"
     st.markdown(
         '<header class="app-topbar"><div class="workspace-pill">'
         '<span class="wordmark-icon">◈</span> INTELLIGENCE WORKSPACE</div>'
         f'<div class="status-badge {"ready" if ready else "pending"}"><span></span>'
-        f'{"MODEL READY" if ready else "MODEL EXPORT NEEDED"}</div></header>',
+        f'{ready_label if ready else "MODEL EXPORT NEEDED"}</div></header>',
         unsafe_allow_html=True,
     )
 
@@ -701,16 +967,16 @@ def main() -> None:
     elif page == "Data Explorer":
         render_explorer(data, source)
     elif page == "Model Performance":
-        render_performance(artifacts, artifact_dir, signature, load_error)
+        render_performance(artifacts, artifact_dir, signature, load_error, paysim, paysim_error)
     elif page == "Single Prediction":
         # Uploaded exploration data never supplies inference defaults.
         sample = data if exploration_upload is None else None
-        render_single(artifacts, sample, load_error)
+        render_single(artifacts, sample, load_error, paysim, paysim_error)
     elif page == "Batch Prediction":
         render_batch(artifacts, load_error)
 
     st.markdown(
-        '<footer class="footer"><span>CreditVault</span><span>Credit Card Fraud Detection · Notebook workflow preserved</span></footer>',
+        '<footer class="footer"><span>CreditVault</span><span>Credit-card intelligence · PaySim transfer analysis</span></footer>',
         unsafe_allow_html=True,
     )
 
