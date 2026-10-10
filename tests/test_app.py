@@ -18,7 +18,7 @@ from streamlit.testing.v1 import AppTest
 from fraud_core import FEATURE_COLUMNS, evaluate_model, load_artifacts, read_transaction_csv
 
 
-APP_PATH = Path(__file__).resolve().parents[1] / "app.py"
+APP_PATH = Path(__file__).resolve().parents[1] / "legacy_dashboard.py"
 PAGES = (
     "Home / Overview", "Data Explorer", "Model Performance", "Single Prediction", "Batch Prediction",
 )

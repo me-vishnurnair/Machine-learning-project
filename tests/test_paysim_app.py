@@ -20,7 +20,7 @@ from paysim_core import (
 from prepare_paysim_model import build_paysim_pipeline
 
 
-APP_PATH = Path(__file__).resolve().parents[1] / "app.py"
+APP_PATH = Path(__file__).resolve().parents[1] / "legacy_dashboard.py"
 
 
 @pytest.fixture(scope="session")
