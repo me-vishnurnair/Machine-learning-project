@@ -1,0 +1,17 @@
+[
+  "type",
+  "amount",
+  "oldbalanceOrg",
+  "newbalanceOrig",
+  "oldbalanceDest",
+  "newbalanceDest",
+  "sender_debited",
+  "receiver_credited",
+  "sender_mismatch",
+  "receiver_mismatch",
+  "account_emptied",
+  "amount_pct_sender_balance",
+  "hour_of_day",
+  "receiver_activity_count",
+  "sender_transactions_24h"
+]

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "selected_model": "Random Forest",
+  "shap_version": "0.53.0",
+  "output_unit": "fraud probability",
+  "sample_strategy": "Uniform sample of the full natural-prevalence chronological test split; used for plots only, not evaluation metrics.",
+  "sample_rows": 300,
+  "sample_fraud_rows": 1,
+  "background_rows": 100,
+  "reference": "Saved training payments; one-hot transaction-type contributions are summed into Transaction Type.",
+  "feature_perturbation": "interventional",
+  "interpretation": "Contributions explain this model relative to the training reference. They are not causal effects or proof of fraud.",
+  "model_sha256": "98adeedefa783d1638c144a27b9a7fb9e08e56db8575bf66d5775bb27bc36f5d",
+  "background_sha256": "6614c6640c1a7424f39cf5be473b320d8bb7b5bca7ec0b7283b17e8f5fdba705",
+  "sample_sha256": "3a757f972865635b41d9d59bf9d64b0e1c1cb28762c3697e87e74c0de4fe6756",
+  "archive_sha256": "4f0379ebdcea25357d5cb591b448062ca6cebbebff8c56f08b254483943c9799",
+  "max_additivity_error": 1.3030138967806693e-08
+}

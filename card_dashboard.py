@@ -189,8 +189,8 @@ def render_context(featured: pd.DataFrame, history: pd.DataFrame) -> None:
         unsafe_allow_html=True,
     )
     columns = st.columns(2)
-    columns[0].metric("Previous hour", f"{int(row['transactions_1h'])} payments")
-    columns[1].metric("Merchant", "Used before" if row["merchant_seen"] else "First seen")
+    columns[0].metric("Previous hour", f"{int(row['transactions_1h'])} payments", help="Earlier payments by this sample card in the hour before the checked payment.")
+    columns[1].metric("Merchant", "Used before" if row["merchant_seen"] else "First seen", help="Whether this sample card paid the merchant strictly before the checked payment.")
     if not history.empty:
         with st.expander("See the five latest earlier payments"):
             st.dataframe(_history_table(history.tail(5)), hide_index=True, width="stretch",
@@ -410,7 +410,13 @@ def performance_page(bundle: CardBundle) -> None:
     cards = st.columns(4)
     metrics = (("Precision", "precision"), ("Recall", "recall"), ("F1 score", "f1"), ("Average precision", "average_precision"))
     for column, (label, name) in zip(cards, metrics):
-        column.metric(label, f"{result[name]:.2%}")
+        definitions = {
+            "precision": "Among payments flagged by this model, the fraction actually labeled fraud.",
+            "recall": "Among payments labeled fraud, the fraction this model flagged.",
+            "f1": "The harmonic mean of precision and recall at the saved review threshold.",
+            "average_precision": "Average precision summarizes precision and recall across thresholds; it differs from trapezoidal PR-AUC.",
+        }
+        column.metric(label, f"{result[name]:.2%}", help=definitions[name])
     st.caption("Precision: how many flagged payments were fraud. Recall: how much of the fraud was caught. F1 balances the two. Average precision summarizes precision and recall across score thresholds.")
     matrix = np.asarray(result["confusion_matrix"], dtype=int)
     left, right = st.columns([1.1, 1], gap="large")
@@ -483,9 +489,9 @@ def performance_page(bundle: CardBundle) -> None:
         st.caption(f"Fraud prevalence in the complete dataset: {prevalence:.3%}. The chart preserves the actual class counts.")
     with st.expander("Accuracy, ROC-AUC, and the baseline"):
         columns = st.columns(3)
-        columns[0].metric("Test accuracy", f"{result['accuracy']:.2%}")
-        columns[1].metric("Always-legitimate baseline", f"{metadata['majority_baseline_accuracy']:.2%}")
-        columns[2].metric("ROC-AUC", f"{result['roc_auc']:.4f}")
+        columns[0].metric("Test accuracy", f"{result['accuracy']:.2%}", help="Fraction of all later payments classified correctly. Rare fraud makes accuracy an incomplete measure.")
+        columns[1].metric("Always-legitimate baseline", f"{metadata['majority_baseline_accuracy']:.2%}", help="Accuracy from calling every payment legitimate, while detecting no fraud.")
+        columns[2].metric("ROC-AUC", f"{result['roc_auc']:.4f}", help="Area under the curve comparing fraud detection and false-positive rates across thresholds.")
         st.write("A model that calls every payment legitimate can have high accuracy when fraud is rare. Precision, recall, average precision, and actual missed-fraud counts help assess whether the system detects fraud.")
         curve = result["roc_curve"]
         figure = go.Figure(go.Scatter(x=curve["x"], y=curve["y"], mode="lines", line=dict(color=LILAC, width=3), name=metadata["selected_model"]))
