@@ -1,3 +1,5 @@
+> Historical Sparkov synthetic credit-card experiment. The current public app uses real anonymized ULB credit-card records. See [the current guide](../README.md).
+
 # Credit Card Fraud Detection System: model and evaluation
 
 The main dashboard detects suspicious credit-card transactions using understandable payment details and strictly earlier account activity. It is a supervised binary-classification project demonstrated with public synthetic credit-card data. A visitor selects a sample card account; the app calculates its spending history automatically and scores a proposed payment with the exported model.

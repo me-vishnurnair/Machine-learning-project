@@ -1,3 +1,5 @@
+> Historical PaySim mobile-money experiment. The current public app uses real anonymized ULB credit-card records. See [the current guide](../README.md).
+
 # Credit Card Fraud Detection System: presentation guide
 
 This is an educational machine-learning fraud detection project. Its main presentation experiment uses **PaySim**, a public simulator of financial transactions. It learns patterns associated with the simulator's fraud labels, predicts a fraud score for a completed transaction, and explains which inputs influenced that score.
