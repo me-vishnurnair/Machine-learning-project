@@ -1,5 +1,7 @@
 # CreditVault — Learn and Present Your Fraud Detection Project
 
+**[Download the readable PDF](docs/CreditVault_Learning_Guide.pdf)**
+
 **[Open the app](https://creditvault.streamlit.app/)** · **[Detailed viva guide](docs/PAYSIM_PRESENTATION.md)**
 
 This README is your study guide. Read it with the app open beside you. Here, a **page/tab** means one screen of the website; a **slide** means a page in your presentation. The website has nine tabs, and this guide explains all nine. A suggested slide order is included near the end.
