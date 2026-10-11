@@ -1,0 +1,15 @@
+[
+  "amount",
+  "hour_sin",
+  "hour_cos",
+  "weekday",
+  "category",
+  "prior_mean_amount",
+  "amount_vs_mean",
+  "transactions_1h",
+  "transactions_24h",
+  "minutes_since_previous",
+  "merchant_seen",
+  "category_seen",
+  "history_available"
+]

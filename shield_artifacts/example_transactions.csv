@@ -1,0 +1,21 @@
+customer_id,timestamp,amount,merchant,category,transaction_id,currency
+CARD-0290,2020-12-08 03:01:53,315.25,Murray-Smitham,grocery_pos,e243a942d157d7a42496894374c22694,USD
+CARD-0290,2020-12-08 03:15:43,721.96,Bogisich-Homenick,misc_net,4cd814f813af9319ab971f506430f9e5,USD
+CARD-0290,2020-12-08 13:44:20,1032.04,Fisher Inc,shopping_net,dcd9bbc877c22bfa68da97cd93737b7b,USD
+CARD-0626,2020-12-10 03:06:40,8.76,Gutmann-Upton,misc_pos,ecae65046332090627e34d75fdeae85a,USD
+CARD-0650,2020-12-11 09:16:59,56.43,Rodriguez Group,gas_transport,ae315623ce79ac03c71aae0dff53bf76,USD
+CARD-0376,2020-12-12 00:28:08,381.5,Rau and Sons,grocery_pos,78948981b7feea35ea7ea14c4fc1a95f,USD
+CARD-0924,2020-12-12 00:28:39,87.77,Barton Inc,grocery_pos,721b7c08886e97887d46fb08ffc02cdd,USD
+CARD-0052,2020-12-12 10:40:52,2.3,Kuhn LLC,shopping_pos,4e1900f6c38dee5f1a8f1c3b919cce02,USD
+CARD-0820,2020-12-12 15:08:56,3.33,"Lakin, Ferry and Beatty",food_dining,86c867b20957b5ceb9cbf3aa956513ed,USD
+CARD-0643,2020-12-12 22:19:18,230.99,Skiles LLC,home,d65b2a2334591a29b5110306ba39712c,USD
+CARD-0474,2020-12-13 23:43:03,1814.08,Metz-Boehm,shopping_pos,d88438363cf9a0a5813440ac86845b54,USD
+CARD-0827,2020-12-14 01:23:44,304.93,Koepp-Witting,grocery_pos,ff5905c7ff04b90358ab2b3fabd4ba5a,USD
+CARD-0421,2020-12-15 23:19:23,815.43,"Wiza, Schaden and Stark",misc_pos,f593ea838b3f7fab8077d1cda9cf6bac,USD
+CARD-0119,2020-12-17 00:52:18,15.41,"Schaefer, McGlynn and Bosco",gas_transport,a8b138ab50a7f2d618a6b4185facb1ef,USD
+CARD-0657,2020-12-19 14:22:59,70.33,"Ledner, Hartmann and Feest",health_fitness,441b8c9ba359580742896b95a200de21,USD
+CARD-0619,2020-12-20 09:32:44,16.13,Dickinson Ltd,misc_pos,f431451d8412fe3f7413e54bc0ca0220,USD
+CARD-0398,2020-12-20 22:20:26,287.42,Kutch-Wilderman,home,f3e3144bb09630f1577c41eb27f1c7fb,USD
+CARD-0907,2020-12-20 23:02:28,20.98,Bednar PLC,kids_pets,ad8eec5bb528ab077348365d55a71220,USD
+CARD-0480,2020-12-28 18:33:45,26.77,"Lubowitz, Terry and Stracke",personal_care,6d5a9aac58749bc57fe71ce17fa29e10,USD
+CARD-0481,2020-12-31 20:38:59,136.43,"Turcotte, McKenzie and Koss",entertainment,b762d45d87286f9122e77b802a30a68c,USD

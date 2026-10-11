@@ -10,7 +10,7 @@ META=json.loads((ROOT/'credit_artifacts/metadata.json').read_text())
 
 
 def open_page(name='Check a transaction'):
-    app=AppTest.from_file(str(ROOT/'app.py'),default_timeout=60).run()
+    app=AppTest.from_file(str(ROOT/'credit_dashboard.py'),default_timeout=60).run()
     if name != 'Check a transaction':
         app.session_state['credit_page']=name
         app.run()
@@ -51,6 +51,6 @@ def test_performance_default_and_extreme_thresholds():
 
 def test_missing_artifacts_show_recovery_message(monkeypatch,tmp_path):
     monkeypatch.setenv('CREDIT_ARTIFACT_DIR',str(tmp_path))
-    app=AppTest.from_file(str(ROOT/'app.py')).run()
+    app=AppTest.from_file(str(ROOT/'credit_dashboard.py')).run()
     assert not app.exception
     assert app.error and 'could not be loaded' in app.error[0].value

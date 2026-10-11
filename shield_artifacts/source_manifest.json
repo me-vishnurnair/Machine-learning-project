@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "dataset_name": "Sparkov simulated credit-card fraud transactions \u2014 original fraudTest.csv portion",
+  "canonical_dataset_page": "https://www.kaggle.com/datasets/kartik2112/fraud-detection",
+  "generator_repository": "https://github.com/namebrandon/Sparkov_Data_Generation",
+  "generator_verified_readme_revision": "b5eb45c89d36f2aa4ef16044a42945bed8b96d93",
+  "synthetic": true,
+  "source": {
+    "repository": "https://github.com/kashish7-7/boosting",
+    "commit": "226b86be472c80100d5af3f4fc9d45df25cb80ed",
+    "path": "data/fraudTest.csv.zip",
+    "git_blob_sha1": "db2d4876294c605e2f8012219ab86662ce754b72",
+    "pinned_source_url": "https://github.com/kashish7-7/boosting/blob/226b86be472c80100d5af3f4fc9d45df25cb80ed/data/fraudTest.csv.zip",
+    "download_method": "Native git read of public repository commit; exact archive bytes saved outside app repository",
+    "archive_sha256": "3289346030c908818faec827052945055370919150bf07dc0a3c89dc2af129b8",
+    "archive_bytes": 63490622,
+    "archive_member": "fraudTest.csv",
+    "archive_uncompressed_bytes": 150354339,
+    "zip_crc_valid": true
+  },
+  "independent_corroboration": {
+    "repository": "https://github.com/MarcoPerdomo/adversarial_fraud_detection",
+    "commit": "1951839f5a598dbeb65e13224fb16d3cd99308be",
+    "path": "data/input_data/synth_data/fraudTest/fraudTest.zip",
+    "evidence": "Independently hosted Git-LFS pointer identifies identical SHA256 and byte size as downloaded ZIP",
+    "archive_sha256": "3289346030c908818faec827052945055370919150bf07dc0a3c89dc2af129b8",
+    "archive_bytes": 63490622,
+    "pinned_pointer_url": "https://github.com/MarcoPerdomo/adversarial_fraud_detection/blob/1951839f5a598dbeb65e13224fb16d3cd99308be/data/input_data/synth_data/fraudTest/fraudTest.zip"
+  },
+  "verified_csv_sha256": "12d553ab19440c752d2531ee1af44bb64f12cc3d3839f1649f19e81c230545f0",
+  "statistics": {
+    "rows": 555719,
+    "columns": [
+      "Unnamed: 0",
+      "trans_date_trans_time",
+      "cc_num",
+      "merchant",
+      "category",
+      "amt",
+      "first",
+      "last",
+      "gender",
+      "street",
+      "city",
+      "state",
+      "zip",
+      "lat",
+      "long",
+      "city_pop",
+      "job",
+      "dob",
+      "trans_num",
+      "unix_time",
+      "merch_lat",
+      "merch_long",
+      "is_fraud"
+    ],
+    "class_counts": {
+      "0": 553574,
+      "1": 2145
+    },
+    "account_count": 924,
+    "categories": [
+      "entertainment",
+      "food_dining",
+      "gas_transport",
+      "grocery_net",
+      "grocery_pos",
+      "health_fitness",
+      "home",
+      "kids_pets",
+      "misc_net",
+      "misc_pos",
+      "personal_care",
+      "shopping_net",
+      "shopping_pos",
+      "travel"
+    ],
+    "merchant_count": 693,
+    "time_min": "2020-06-21 12:14:25",
+    "time_max": "2020-12-31 23:59:34",
+    "monotonic_time": true,
+    "missing_by_column": {
+      "Unnamed: 0": 0,
+      "trans_date_trans_time": 0,
+      "cc_num": 0,
+      "merchant": 0,
+      "category": 0,
+      "amt": 0,
+      "first": 0,
+      "last": 0,
+      "gender": 0,
+      "street": 0,
+      "city": 0,
+      "state": 0,
+      "zip": 0,
+      "lat": 0,
+      "long": 0,
+      "city_pop": 0,
+      "job": 0,
+      "dob": 0,
+      "trans_num": 0,
+      "unix_time": 0,
+      "merch_lat": 0,
+      "merch_long": 0,
+      "is_fraud": 0
+    },
+    "nonfinite_numeric": {
+      "amt": 0,
+      "lat": 0,
+      "long": 0,
+      "city_pop": 0,
+      "unix_time": 0,
+      "merch_lat": 0,
+      "merch_long": 0,
+      "is_fraud": 0
+    },
+    "duplicate_whole_rows": 0,
+    "duplicate_transaction_ids": 0,
+    "amount_min": 1.0,
+    "amount_max": 22768.11,
+    "sha256": "12d553ab19440c752d2531ee1af44bb64f12cc3d3839f1649f19e81c230545f0",
+    "first_transaction_ids": [
+      "2da90c7d74bd46a0caf3777415b3ebd3",
+      "324cc204407e99f51b0d6ca0055005e7",
+      "c81755dbbbea9d5c77f094348a7579be"
+    ],
+    "last_transaction_ids": [
+      "6c5b7c8add471975aa0fec023b2e8408",
+      "14392d723bb7737606b2700ac791b7aa",
+      "1765bb45b3aa3224b4cdcb6e7a96cee3"
+    ],
+    "geo_ranges": {
+      "lat": {
+        "min": 20.0271,
+        "max": 65.6899
+      },
+      "long": {
+        "min": -165.6723,
+        "max": -67.9503
+      },
+      "merch_lat": {
+        "min": 19.027422,
+        "max": 66.67929699999999
+      },
+      "merch_long": {
+        "min": -166.671575,
+        "max": -66.952026
+      }
+    },
+    "unix_time_vs_transaction_datetime_offset_seconds": [
+      220924800
+    ]
+  },
+  "scope": {
+    "original_portion": "fraudTest.csv only; original fraudTrain.csv not used",
+    "project_usage": "This publicly available portion is repurposed into new chronological training, validation, and test partitions for this project.",
+    "historical_claims": "Do not claim evaluation on the original published train/test split, or on the full approximately 1.85 million-row combined dataset."
+  },
+  "validation": {
+    "passed": true,
+    "checks": [
+      "ZIP CRC; explicit single-member safe extraction",
+      "Expected raw Sparkov columns present",
+      "555719 rows and both binary target classes",
+      "No missing values or nonfinite numeric values",
+      "Unique transaction identifiers; no duplicated full rows",
+      "Chronological transaction times",
+      "Archive SHA256 independently corroborated by separate public Git-LFS pointer"
+    ],
+    "rejected_inputs": [
+      "Empty 22-byte ZIP mirror archives were not used",
+      "Already encoded gzipped CSV without raw account IDs was not used",
+      "Unretrieved Git-LFS original train data was not used"
+    ]
+  },
+  "limitations": [
+    "All cardholder identities, account numbers, merchants, transactions, and fraud labels are simulated; this is an academic demonstration.",
+    "Synthetic generator rules can make fraud unusually predictable; strong scores do not establish real-bank deployment performance.",
+    "Chronological evaluation of accounts with past history demonstrates future transactions for known accounts; it does not establish performance on unseen accounts.",
+    "Only the original fraudTest.csv source portion was available and audited, and it is newly split within this project.",
+    "Dataset license was not independently verified against the canonical Kaggle page because environment egress blocked access; a third-party README describes CC0, which is not treated here as verified licensing metadata.",
+    "The provided unix_time is consistently offset by 220924800 seconds from trans_date_trans_time interpreted as UTC. Use the human-readable transaction datetime consistently for model time/history features; avoid treating the raw unix_time as the actual 2020 timestamp."
+  ]
+}

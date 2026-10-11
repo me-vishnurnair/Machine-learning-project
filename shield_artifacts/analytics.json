@@ -1,0 +1,1258 @@
+{
+  "scope": "All cleaned source transactions; recorded labels, not live app predictions.",
+  "amount_mean": 69.39281023322938,
+  "amount_median": 47.29,
+  "amount_total": 38562903.11,
+  "daily": [
+    {
+      "day": "2020-06-21",
+      "transactions": 2028,
+      "fraud": 10,
+      "amount": 133747.81
+    },
+    {
+      "day": "2020-06-22",
+      "transactions": 4078,
+      "fraud": 12,
+      "amount": 273118.13
+    },
+    {
+      "day": "2020-06-23",
+      "transactions": 3899,
+      "fraud": 0,
+      "amount": 261246.19
+    },
+    {
+      "day": "2020-06-24",
+      "transactions": 1846,
+      "fraud": 15,
+      "amount": 121247.77
+    },
+    {
+      "day": "2020-06-25",
+      "transactions": 2067,
+      "fraud": 5,
+      "amount": 147070.87
+    },
+    {
+      "day": "2020-06-26",
+      "transactions": 2357,
+      "fraud": 11,
+      "amount": 169726.83
+    },
+    {
+      "day": "2020-06-27",
+      "transactions": 2360,
+      "fraud": 12,
+      "amount": 173690.74
+    },
+    {
+      "day": "2020-06-28",
+      "transactions": 3422,
+      "fraud": 8,
+      "amount": 237137.95
+    },
+    {
+      "day": "2020-06-29",
+      "transactions": 4129,
+      "fraud": 22,
+      "amount": 291319.4
+    },
+    {
+      "day": "2020-06-30",
+      "transactions": 3872,
+      "fraud": 38,
+      "amount": 271232.66
+    },
+    {
+      "day": "2020-07-01",
+      "transactions": 1854,
+      "fraud": 3,
+      "amount": 120627.12
+    },
+    {
+      "day": "2020-07-02",
+      "transactions": 2032,
+      "fraud": 2,
+      "amount": 136973.77
+    },
+    {
+      "day": "2020-07-03",
+      "transactions": 2276,
+      "fraud": 14,
+      "amount": 184660.3
+    },
+    {
+      "day": "2020-07-04",
+      "transactions": 2338,
+      "fraud": 9,
+      "amount": 159208.59
+    },
+    {
+      "day": "2020-07-05",
+      "transactions": 3494,
+      "fraud": 14,
+      "amount": 230063.84
+    },
+    {
+      "day": "2020-07-06",
+      "transactions": 4144,
+      "fraud": 16,
+      "amount": 284430.27
+    },
+    {
+      "day": "2020-07-07",
+      "transactions": 3912,
+      "fraud": 8,
+      "amount": 276974.95
+    },
+    {
+      "day": "2020-07-08",
+      "transactions": 1768,
+      "fraud": 10,
+      "amount": 128013.07
+    },
+    {
+      "day": "2020-07-09",
+      "transactions": 2170,
+      "fraud": 6,
+      "amount": 145842.11
+    },
+    {
+      "day": "2020-07-10",
+      "transactions": 2393,
+      "fraud": 9,
+      "amount": 163564.87
+    },
+    {
+      "day": "2020-07-11",
+      "transactions": 2339,
+      "fraud": 20,
+      "amount": 163507.76
+    },
+    {
+      "day": "2020-07-12",
+      "transactions": 3420,
+      "fraud": 21,
+      "amount": 235926.93
+    },
+    {
+      "day": "2020-07-13",
+      "transactions": 3954,
+      "fraud": 8,
+      "amount": 258369.85
+    },
+    {
+      "day": "2020-07-14",
+      "transactions": 3881,
+      "fraud": 5,
+      "amount": 258038.77
+    },
+    {
+      "day": "2020-07-15",
+      "transactions": 1856,
+      "fraud": 3,
+      "amount": 129892.96
+    },
+    {
+      "day": "2020-07-16",
+      "transactions": 2045,
+      "fraud": 0,
+      "amount": 136245.99
+    },
+    {
+      "day": "2020-07-17",
+      "transactions": 2309,
+      "fraud": 0,
+      "amount": 163397.3
+    },
+    {
+      "day": "2020-07-18",
+      "transactions": 2302,
+      "fraud": 12,
+      "amount": 171279.66
+    },
+    {
+      "day": "2020-07-19",
+      "transactions": 3445,
+      "fraud": 32,
+      "amount": 264648.63
+    },
+    {
+      "day": "2020-07-20",
+      "transactions": 4067,
+      "fraud": 26,
+      "amount": 275963.01
+    },
+    {
+      "day": "2020-07-21",
+      "transactions": 3902,
+      "fraud": 17,
+      "amount": 272394.92
+    },
+    {
+      "day": "2020-07-22",
+      "transactions": 1796,
+      "fraud": 13,
+      "amount": 114282.7
+    },
+    {
+      "day": "2020-07-23",
+      "transactions": 2067,
+      "fraud": 10,
+      "amount": 153011.91
+    },
+    {
+      "day": "2020-07-24",
+      "transactions": 2402,
+      "fraud": 5,
+      "amount": 158465.16
+    },
+    {
+      "day": "2020-07-25",
+      "transactions": 2278,
+      "fraud": 4,
+      "amount": 151580.38
+    },
+    {
+      "day": "2020-07-26",
+      "transactions": 3406,
+      "fraud": 13,
+      "amount": 231742.77
+    },
+    {
+      "day": "2020-07-27",
+      "transactions": 3969,
+      "fraud": 7,
+      "amount": 263318.26
+    },
+    {
+      "day": "2020-07-28",
+      "transactions": 3871,
+      "fraud": 10,
+      "amount": 263966.77
+    },
+    {
+      "day": "2020-07-29",
+      "transactions": 1827,
+      "fraud": 0,
+      "amount": 126988.91
+    },
+    {
+      "day": "2020-07-30",
+      "transactions": 2040,
+      "fraud": 12,
+      "amount": 145667.18
+    },
+    {
+      "day": "2020-07-31",
+      "transactions": 2291,
+      "fraud": 12,
+      "amount": 169164.03
+    },
+    {
+      "day": "2020-08-01",
+      "transactions": 2300,
+      "fraud": 5,
+      "amount": 163518.38
+    },
+    {
+      "day": "2020-08-02",
+      "transactions": 3456,
+      "fraud": 16,
+      "amount": 253727.93
+    },
+    {
+      "day": "2020-08-03",
+      "transactions": 4074,
+      "fraud": 28,
+      "amount": 268014.36
+    },
+    {
+      "day": "2020-08-04",
+      "transactions": 3852,
+      "fraud": 20,
+      "amount": 264371.98
+    },
+    {
+      "day": "2020-08-05",
+      "transactions": 1777,
+      "fraud": 8,
+      "amount": 137955.17
+    },
+    {
+      "day": "2020-08-06",
+      "transactions": 2119,
+      "fraud": 17,
+      "amount": 150617.25
+    },
+    {
+      "day": "2020-08-07",
+      "transactions": 2330,
+      "fraud": 38,
+      "amount": 167457.41
+    },
+    {
+      "day": "2020-08-08",
+      "transactions": 2379,
+      "fraud": 27,
+      "amount": 170087.17
+    },
+    {
+      "day": "2020-08-09",
+      "transactions": 3488,
+      "fraud": 10,
+      "amount": 252514.12
+    },
+    {
+      "day": "2020-08-10",
+      "transactions": 3981,
+      "fraud": 9,
+      "amount": 275952.37
+    },
+    {
+      "day": "2020-08-11",
+      "transactions": 3828,
+      "fraud": 22,
+      "amount": 267125.73
+    },
+    {
+      "day": "2020-08-12",
+      "transactions": 1877,
+      "fraud": 17,
+      "amount": 139317.2
+    },
+    {
+      "day": "2020-08-13",
+      "transactions": 2083,
+      "fraud": 17,
+      "amount": 142677.92
+    },
+    {
+      "day": "2020-08-14",
+      "transactions": 2252,
+      "fraud": 5,
+      "amount": 149934.1
+    },
+    {
+      "day": "2020-08-15",
+      "transactions": 2191,
+      "fraud": 3,
+      "amount": 146999.55
+    },
+    {
+      "day": "2020-08-16",
+      "transactions": 3311,
+      "fraud": 5,
+      "amount": 224854.38
+    },
+    {
+      "day": "2020-08-17",
+      "transactions": 3935,
+      "fraud": 5,
+      "amount": 256209.02
+    },
+    {
+      "day": "2020-08-18",
+      "transactions": 3824,
+      "fraud": 11,
+      "amount": 263270.86
+    },
+    {
+      "day": "2020-08-19",
+      "transactions": 1908,
+      "fraud": 2,
+      "amount": 125619.94
+    },
+    {
+      "day": "2020-08-20",
+      "transactions": 2181,
+      "fraud": 18,
+      "amount": 161508.23
+    },
+    {
+      "day": "2020-08-21",
+      "transactions": 2342,
+      "fraud": 12,
+      "amount": 155186.21
+    },
+    {
+      "day": "2020-08-22",
+      "transactions": 2276,
+      "fraud": 8,
+      "amount": 150618.13
+    },
+    {
+      "day": "2020-08-23",
+      "transactions": 3315,
+      "fraud": 13,
+      "amount": 238736.88
+    },
+    {
+      "day": "2020-08-24",
+      "transactions": 4035,
+      "fraud": 17,
+      "amount": 262070.8
+    },
+    {
+      "day": "2020-08-25",
+      "transactions": 3746,
+      "fraud": 27,
+      "amount": 258906.83
+    },
+    {
+      "day": "2020-08-26",
+      "transactions": 1839,
+      "fraud": 15,
+      "amount": 119276.53
+    },
+    {
+      "day": "2020-08-27",
+      "transactions": 2051,
+      "fraud": 20,
+      "amount": 154356.62
+    },
+    {
+      "day": "2020-08-28",
+      "transactions": 2296,
+      "fraud": 10,
+      "amount": 156965.98
+    },
+    {
+      "day": "2020-08-29",
+      "transactions": 2304,
+      "fraud": 0,
+      "amount": 162033.47
+    },
+    {
+      "day": "2020-08-30",
+      "transactions": 3328,
+      "fraud": 6,
+      "amount": 218851.06
+    },
+    {
+      "day": "2020-08-31",
+      "transactions": 4081,
+      "fraud": 4,
+      "amount": 274742.59
+    },
+    {
+      "day": "2020-09-01",
+      "transactions": 3841,
+      "fraud": 13,
+      "amount": 268332.2
+    },
+    {
+      "day": "2020-09-02",
+      "transactions": 1496,
+      "fraud": 9,
+      "amount": 106438.17
+    },
+    {
+      "day": "2020-09-03",
+      "transactions": 1768,
+      "fraud": 6,
+      "amount": 124211.89
+    },
+    {
+      "day": "2020-09-04",
+      "transactions": 1909,
+      "fraud": 19,
+      "amount": 140975.24
+    },
+    {
+      "day": "2020-09-05",
+      "transactions": 1896,
+      "fraud": 23,
+      "amount": 137383.38
+    },
+    {
+      "day": "2020-09-06",
+      "transactions": 2690,
+      "fraud": 12,
+      "amount": 190399.09
+    },
+    {
+      "day": "2020-09-07",
+      "transactions": 3259,
+      "fraud": 14,
+      "amount": 240616.26
+    },
+    {
+      "day": "2020-09-08",
+      "transactions": 3056,
+      "fraud": 18,
+      "amount": 215641.15
+    },
+    {
+      "day": "2020-09-09",
+      "transactions": 1479,
+      "fraud": 8,
+      "amount": 105847.18
+    },
+    {
+      "day": "2020-09-10",
+      "transactions": 1800,
+      "fraud": 9,
+      "amount": 132473.05
+    },
+    {
+      "day": "2020-09-11",
+      "transactions": 1966,
+      "fraud": 7,
+      "amount": 141384.71
+    },
+    {
+      "day": "2020-09-12",
+      "transactions": 1895,
+      "fraud": 3,
+      "amount": 120011.25
+    },
+    {
+      "day": "2020-09-13",
+      "transactions": 2813,
+      "fraud": 13,
+      "amount": 189427.04
+    },
+    {
+      "day": "2020-09-14",
+      "transactions": 3222,
+      "fraud": 10,
+      "amount": 214537.95
+    },
+    {
+      "day": "2020-09-15",
+      "transactions": 3128,
+      "fraud": 6,
+      "amount": 224871.06
+    },
+    {
+      "day": "2020-09-16",
+      "transactions": 1465,
+      "fraud": 12,
+      "amount": 98042.83
+    },
+    {
+      "day": "2020-09-17",
+      "transactions": 1672,
+      "fraud": 16,
+      "amount": 122269.67
+    },
+    {
+      "day": "2020-09-18",
+      "transactions": 1891,
+      "fraud": 7,
+      "amount": 130274.93
+    },
+    {
+      "day": "2020-09-19",
+      "transactions": 1933,
+      "fraud": 0,
+      "amount": 131957.81
+    },
+    {
+      "day": "2020-09-20",
+      "transactions": 2697,
+      "fraud": 2,
+      "amount": 181663.53
+    },
+    {
+      "day": "2020-09-21",
+      "transactions": 3151,
+      "fraud": 5,
+      "amount": 229859.46
+    },
+    {
+      "day": "2020-09-22",
+      "transactions": 3059,
+      "fraud": 11,
+      "amount": 209784.57
+    },
+    {
+      "day": "2020-09-23",
+      "transactions": 1494,
+      "fraud": 20,
+      "amount": 107852.36
+    },
+    {
+      "day": "2020-09-24",
+      "transactions": 1685,
+      "fraud": 25,
+      "amount": 127153.47
+    },
+    {
+      "day": "2020-09-25",
+      "transactions": 1877,
+      "fraud": 16,
+      "amount": 135243.26
+    },
+    {
+      "day": "2020-09-26",
+      "transactions": 1898,
+      "fraud": 6,
+      "amount": 131984.9
+    },
+    {
+      "day": "2020-09-27",
+      "transactions": 2758,
+      "fraud": 20,
+      "amount": 210223.67
+    },
+    {
+      "day": "2020-09-28",
+      "transactions": 3196,
+      "fraud": 14,
+      "amount": 215534.06
+    },
+    {
+      "day": "2020-09-29",
+      "transactions": 3031,
+      "fraud": 8,
+      "amount": 218834.94
+    },
+    {
+      "day": "2020-09-30",
+      "transactions": 1508,
+      "fraud": 8,
+      "amount": 107771.0
+    },
+    {
+      "day": "2020-10-01",
+      "transactions": 1687,
+      "fraud": 5,
+      "amount": 120243.23
+    },
+    {
+      "day": "2020-10-02",
+      "transactions": 1912,
+      "fraud": 5,
+      "amount": 128260.33
+    },
+    {
+      "day": "2020-10-03",
+      "transactions": 1896,
+      "fraud": 16,
+      "amount": 131278.64
+    },
+    {
+      "day": "2020-10-04",
+      "transactions": 2788,
+      "fraud": 40,
+      "amount": 197393.26
+    },
+    {
+      "day": "2020-10-05",
+      "transactions": 3177,
+      "fraud": 31,
+      "amount": 210601.29
+    },
+    {
+      "day": "2020-10-06",
+      "transactions": 3060,
+      "fraud": 16,
+      "amount": 207369.0
+    },
+    {
+      "day": "2020-10-07",
+      "transactions": 1517,
+      "fraud": 14,
+      "amount": 114928.08
+    },
+    {
+      "day": "2020-10-08",
+      "transactions": 1610,
+      "fraud": 14,
+      "amount": 118524.03
+    },
+    {
+      "day": "2020-10-09",
+      "transactions": 1905,
+      "fraud": 4,
+      "amount": 125144.53
+    },
+    {
+      "day": "2020-10-10",
+      "transactions": 1926,
+      "fraud": 7,
+      "amount": 141291.55
+    },
+    {
+      "day": "2020-10-11",
+      "transactions": 2733,
+      "fraud": 14,
+      "amount": 184638.13
+    },
+    {
+      "day": "2020-10-12",
+      "transactions": 3201,
+      "fraud": 10,
+      "amount": 229960.24
+    },
+    {
+      "day": "2020-10-13",
+      "transactions": 3019,
+      "fraud": 6,
+      "amount": 209394.13
+    },
+    {
+      "day": "2020-10-14",
+      "transactions": 1560,
+      "fraud": 17,
+      "amount": 116498.76
+    },
+    {
+      "day": "2020-10-15",
+      "transactions": 1694,
+      "fraud": 27,
+      "amount": 123639.03
+    },
+    {
+      "day": "2020-10-16",
+      "transactions": 1913,
+      "fraud": 20,
+      "amount": 139234.11
+    },
+    {
+      "day": "2020-10-17",
+      "transactions": 1876,
+      "fraud": 17,
+      "amount": 131175.36
+    },
+    {
+      "day": "2020-10-18",
+      "transactions": 2709,
+      "fraud": 19,
+      "amount": 185678.77
+    },
+    {
+      "day": "2020-10-19",
+      "transactions": 3200,
+      "fraud": 3,
+      "amount": 232959.11
+    },
+    {
+      "day": "2020-10-20",
+      "transactions": 3066,
+      "fraud": 0,
+      "amount": 202420.6
+    },
+    {
+      "day": "2020-10-21",
+      "transactions": 1520,
+      "fraud": 0,
+      "amount": 102547.03
+    },
+    {
+      "day": "2020-10-22",
+      "transactions": 1636,
+      "fraud": 4,
+      "amount": 106670.86
+    },
+    {
+      "day": "2020-10-23",
+      "transactions": 1949,
+      "fraud": 5,
+      "amount": 135107.76
+    },
+    {
+      "day": "2020-10-24",
+      "transactions": 1789,
+      "fraud": 15,
+      "amount": 140067.32
+    },
+    {
+      "day": "2020-10-25",
+      "transactions": 2728,
+      "fraud": 38,
+      "amount": 198792.57
+    },
+    {
+      "day": "2020-10-26",
+      "transactions": 3226,
+      "fraud": 4,
+      "amount": 225089.24
+    },
+    {
+      "day": "2020-10-27",
+      "transactions": 3117,
+      "fraud": 10,
+      "amount": 216442.2
+    },
+    {
+      "day": "2020-10-28",
+      "transactions": 1538,
+      "fraud": 5,
+      "amount": 96087.62
+    },
+    {
+      "day": "2020-10-29",
+      "transactions": 1633,
+      "fraud": 4,
+      "amount": 115429.92
+    },
+    {
+      "day": "2020-10-30",
+      "transactions": 1902,
+      "fraud": 1,
+      "amount": 145623.0
+    },
+    {
+      "day": "2020-10-31",
+      "transactions": 1861,
+      "fraud": 13,
+      "amount": 136463.29
+    },
+    {
+      "day": "2020-11-01",
+      "transactions": 2716,
+      "fraud": 16,
+      "amount": 192046.04
+    },
+    {
+      "day": "2020-11-02",
+      "transactions": 3127,
+      "fraud": 4,
+      "amount": 208945.93
+    },
+    {
+      "day": "2020-11-03",
+      "transactions": 3151,
+      "fraud": 8,
+      "amount": 215889.54
+    },
+    {
+      "day": "2020-11-04",
+      "transactions": 1495,
+      "fraud": 16,
+      "amount": 107214.73
+    },
+    {
+      "day": "2020-11-05",
+      "transactions": 1640,
+      "fraud": 19,
+      "amount": 115744.79
+    },
+    {
+      "day": "2020-11-06",
+      "transactions": 1823,
+      "fraud": 8,
+      "amount": 127929.06
+    },
+    {
+      "day": "2020-11-07",
+      "transactions": 1902,
+      "fraud": 5,
+      "amount": 132237.4
+    },
+    {
+      "day": "2020-11-08",
+      "transactions": 2729,
+      "fraud": 12,
+      "amount": 190596.97
+    },
+    {
+      "day": "2020-11-09",
+      "transactions": 3371,
+      "fraud": 7,
+      "amount": 226778.6
+    },
+    {
+      "day": "2020-11-10",
+      "transactions": 3166,
+      "fraud": 13,
+      "amount": 219672.35
+    },
+    {
+      "day": "2020-11-11",
+      "transactions": 1536,
+      "fraud": 3,
+      "amount": 97450.89
+    },
+    {
+      "day": "2020-11-12",
+      "transactions": 1623,
+      "fraud": 8,
+      "amount": 109027.62
+    },
+    {
+      "day": "2020-11-13",
+      "transactions": 1877,
+      "fraud": 13,
+      "amount": 126476.08
+    },
+    {
+      "day": "2020-11-14",
+      "transactions": 1817,
+      "fraud": 6,
+      "amount": 128139.23
+    },
+    {
+      "day": "2020-11-15",
+      "transactions": 2712,
+      "fraud": 6,
+      "amount": 176292.98
+    },
+    {
+      "day": "2020-11-16",
+      "transactions": 3200,
+      "fraud": 6,
+      "amount": 228465.23
+    },
+    {
+      "day": "2020-11-17",
+      "transactions": 3097,
+      "fraud": 0,
+      "amount": 192836.69
+    },
+    {
+      "day": "2020-11-18",
+      "transactions": 1460,
+      "fraud": 9,
+      "amount": 104700.2
+    },
+    {
+      "day": "2020-11-19",
+      "transactions": 1685,
+      "fraud": 15,
+      "amount": 116180.79
+    },
+    {
+      "day": "2020-11-20",
+      "transactions": 1843,
+      "fraud": 21,
+      "amount": 138370.03
+    },
+    {
+      "day": "2020-11-21",
+      "transactions": 1818,
+      "fraud": 7,
+      "amount": 126301.02
+    },
+    {
+      "day": "2020-11-22",
+      "transactions": 2651,
+      "fraud": 3,
+      "amount": 184870.82
+    },
+    {
+      "day": "2020-11-23",
+      "transactions": 3212,
+      "fraud": 8,
+      "amount": 227969.81
+    },
+    {
+      "day": "2020-11-24",
+      "transactions": 2989,
+      "fraud": 4,
+      "amount": 220440.88
+    },
+    {
+      "day": "2020-11-25",
+      "transactions": 1488,
+      "fraud": 17,
+      "amount": 114463.32
+    },
+    {
+      "day": "2020-11-26",
+      "transactions": 1661,
+      "fraud": 29,
+      "amount": 128329.3
+    },
+    {
+      "day": "2020-11-27",
+      "transactions": 1834,
+      "fraud": 23,
+      "amount": 157088.42
+    },
+    {
+      "day": "2020-11-28",
+      "transactions": 1796,
+      "fraud": 8,
+      "amount": 119694.68
+    },
+    {
+      "day": "2020-11-29",
+      "transactions": 2686,
+      "fraud": 0,
+      "amount": 169977.34
+    },
+    {
+      "day": "2020-11-30",
+      "transactions": 6530,
+      "fraud": 0,
+      "amount": 424456.99
+    },
+    {
+      "day": "2020-12-01",
+      "transactions": 6204,
+      "fraud": 11,
+      "amount": 421709.5
+    },
+    {
+      "day": "2020-12-02",
+      "transactions": 2991,
+      "fraud": 16,
+      "amount": 199264.59
+    },
+    {
+      "day": "2020-12-03",
+      "transactions": 3264,
+      "fraud": 4,
+      "amount": 216371.66
+    },
+    {
+      "day": "2020-12-04",
+      "transactions": 3685,
+      "fraud": 8,
+      "amount": 247934.76
+    },
+    {
+      "day": "2020-12-05",
+      "transactions": 3785,
+      "fraud": 14,
+      "amount": 250418.23
+    },
+    {
+      "day": "2020-12-06",
+      "transactions": 5397,
+      "fraud": 18,
+      "amount": 400919.52
+    },
+    {
+      "day": "2020-12-07",
+      "transactions": 6506,
+      "fraud": 11,
+      "amount": 451228.81
+    },
+    {
+      "day": "2020-12-08",
+      "transactions": 6164,
+      "fraud": 29,
+      "amount": 424498.29
+    },
+    {
+      "day": "2020-12-09",
+      "transactions": 2974,
+      "fraud": 14,
+      "amount": 195380.38999999998
+    },
+    {
+      "day": "2020-12-10",
+      "transactions": 3451,
+      "fraud": 4,
+      "amount": 237353.05
+    },
+    {
+      "day": "2020-12-11",
+      "transactions": 3793,
+      "fraud": 21,
+      "amount": 253503.93
+    },
+    {
+      "day": "2020-12-12",
+      "transactions": 3641,
+      "fraud": 19,
+      "amount": 252035.64
+    },
+    {
+      "day": "2020-12-13",
+      "transactions": 5400,
+      "fraud": 9,
+      "amount": 369623.14
+    },
+    {
+      "day": "2020-12-14",
+      "transactions": 6400,
+      "fraud": 11,
+      "amount": 449640.22
+    },
+    {
+      "day": "2020-12-15",
+      "transactions": 6050,
+      "fraud": 13,
+      "amount": 436418.32
+    },
+    {
+      "day": "2020-12-16",
+      "transactions": 3012,
+      "fraud": 12,
+      "amount": 229668.93
+    },
+    {
+      "day": "2020-12-17",
+      "transactions": 3430,
+      "fraud": 13,
+      "amount": 244420.34
+    },
+    {
+      "day": "2020-12-18",
+      "transactions": 3830,
+      "fraud": 3,
+      "amount": 263449.48
+    },
+    {
+      "day": "2020-12-19",
+      "transactions": 3705,
+      "fraud": 7,
+      "amount": 260247.22
+    },
+    {
+      "day": "2020-12-20",
+      "transactions": 5431,
+      "fraud": 4,
+      "amount": 373431.01
+    },
+    {
+      "day": "2020-12-21",
+      "transactions": 6390,
+      "fraud": 10,
+      "amount": 448059.05
+    },
+    {
+      "day": "2020-12-22",
+      "transactions": 6123,
+      "fraud": 7,
+      "amount": 440479.53
+    },
+    {
+      "day": "2020-12-23",
+      "transactions": 2941,
+      "fraud": 0,
+      "amount": 190250.86
+    },
+    {
+      "day": "2020-12-24",
+      "transactions": 3285,
+      "fraud": 0,
+      "amount": 211545.63
+    },
+    {
+      "day": "2020-12-25",
+      "transactions": 3649,
+      "fraud": 0,
+      "amount": 246470.08
+    },
+    {
+      "day": "2020-12-26",
+      "transactions": 3769,
+      "fraud": 0,
+      "amount": 257104.75
+    },
+    {
+      "day": "2020-12-27",
+      "transactions": 5347,
+      "fraud": 0,
+      "amount": 377875.84
+    },
+    {
+      "day": "2020-12-28",
+      "transactions": 6321,
+      "fraud": 0,
+      "amount": 412721.56
+    },
+    {
+      "day": "2020-12-29",
+      "transactions": 6205,
+      "fraud": 0,
+      "amount": 416623.53
+    },
+    {
+      "day": "2020-12-30",
+      "transactions": 3018,
+      "fraud": 0,
+      "amount": 198556.4
+    },
+    {
+      "day": "2020-12-31",
+      "transactions": 3377,
+      "fraud": 0,
+      "amount": 225928.79
+    }
+  ],
+  "categories": [
+    {
+      "category": "entertainment",
+      "transactions": 40104,
+      "fraud": 59,
+      "mean_amount": 63.98483991621784
+    },
+    {
+      "category": "food_dining",
+      "transactions": 39268,
+      "fraud": 54,
+      "mean_amount": 50.777938270347356
+    },
+    {
+      "category": "gas_transport",
+      "transactions": 56370,
+      "fraud": 154,
+      "mean_amount": 63.57700124179528
+    },
+    {
+      "category": "grocery_net",
+      "transactions": 19426,
+      "fraud": 41,
+      "mean_amount": 53.731667353032016
+    },
+    {
+      "category": "grocery_pos",
+      "transactions": 52553,
+      "fraud": 485,
+      "mean_amount": 115.88532700321579
+    },
+    {
+      "category": "health_fitness",
+      "transactions": 36674,
+      "fraud": 52,
+      "mean_amount": 53.867431695479084
+    },
+    {
+      "category": "home",
+      "transactions": 52345,
+      "fraud": 67,
+      "mean_amount": 57.995412933422486
+    },
+    {
+      "category": "kids_pets",
+      "transactions": 48692,
+      "fraud": 65,
+      "mean_amount": 57.50691263451901
+    },
+    {
+      "category": "misc_net",
+      "transactions": 27367,
+      "fraud": 267,
+      "mean_amount": 78.6002367815252
+    },
+    {
+      "category": "misc_pos",
+      "transactions": 34574,
+      "fraud": 72,
+      "mean_amount": 62.18224590732921
+    },
+    {
+      "category": "personal_care",
+      "transactions": 39327,
+      "fraud": 70,
+      "mean_amount": 48.23302057110891
+    },
+    {
+      "category": "shopping_net",
+      "transactions": 41779,
+      "fraud": 506,
+      "mean_amount": 83.48165322291104
+    },
+    {
+      "category": "shopping_pos",
+      "transactions": 49791,
+      "fraud": 213,
+      "mean_amount": 76.86245727139443
+    },
+    {
+      "category": "travel",
+      "transactions": 17449,
+      "fraud": 40,
+      "mean_amount": 112.38968250329532
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "rows": 128,
+  "sample": "Uniform random sample of later test rows, seed 42",
+  "unit": "log-odds",
+  "importance": {
+    "amount": 0.9849357726330954,
+    "time_of_day": 0.6368519194396001,
+    "weekday": 0.21737583527526527,
+    "prior_mean_amount": 0.4986697225853689,
+    "amount_vs_mean": 0.09631688123256943,
+    "transactions_1h": 0.015948872734171005,
+    "transactions_24h": 0.3488710678148752,
+    "minutes_since_previous": 0.29238732071192075,
+    "merchant_seen": 0.030501759198059197,
+    "category_seen": 0.023690187621262737,
+    "history_available": 0.04409392416090441,
+    "category": 0.8598406503682465
+  }
+}
