@@ -2,7 +2,7 @@
 
 # CreditVault — Credit Card Fraud Detection
 
-**[Open the website](https://creditvault.streamlit.app/)** · **[Download the readable learning guide](docs/CreditVault_Learning_Guide.pdf)**
+**[Open the website](https://creditvault.streamlit.app/)** · **[Download the readable learning guide](../CreditVault_Learning_Guide.pdf)**
 
 The current app uses the **real, anonymized ULB/Worldline credit-card transaction dataset** from the original notebook. It loads a newly trained model and lets you analyze recorded transactions or a compatible CSV. PaySim and synthetic card experiments are preserved as historical work; they no longer power the main website.
 
@@ -230,7 +230,7 @@ The full source is kept outside the repository. Its SHA-256 is:
 76274b691b16a6c49d3f159c883398e03ccd6d1ee12d9d8ee38f4b4b98551a89
 ```
 
-Source download and fingerprint evidence are recorded in [the original provenance document](docs/REBUILT_MODEL.md). Dataset licensing is not inferred from the mirror's code license. To reproduce into a new empty directory:
+Source download and fingerprint evidence are recorded in [the original provenance document](REBUILT_MODEL.md). Dataset licensing is not inferred from the mirror's code license. To reproduce into a new empty directory:
 
 ```bash
 python train_credit_model.py --data /path/outside/repository/creditcard.csv --output /path/new-credit-export
@@ -244,4 +244,4 @@ The public Streamlit app uses this repository's `main` branch and `app.py`. The 
 
 The previous experiments and notebooks are preserved. Run `streamlit run presentation_dashboard.py` for the earlier PaySim dashboard, `streamlit run card_dashboard.py` for the separate Sparkov study, or `streamlit run legacy_dashboard.py` for the original research interface. Their data and scores must not be presented as the current ULB model's results.
 
-Archived learning materials: [PaySim text guide](docs/PAYSIM_LEARNING_GUIDE.md) · [PaySim PDF archive](docs/PaySim_Learning_Guide_Archive.pdf).
+Archived learning materials: [PaySim text guide](PAYSIM_LEARNING_GUIDE.md) · [PaySim PDF archive](PaySim_Learning_Guide_Archive.pdf).

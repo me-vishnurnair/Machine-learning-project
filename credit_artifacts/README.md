@@ -10,6 +10,6 @@ Random Forest was selected by validation F1 (84.3137%) before later evaluation. 
 
 `demo_transactions.csv` contains 16 genuine later records with observed labels and saved predictions. `example_upload.csv` includes only their input fields. `background.csv` contains 64 actual earlier training references for true SHAP. Current forest explanations use model probability units and are checked for additivity.
 
-Scores are uncalibrated. The provider's original PCA fitting cannot be audited; the earlier notebook already used this public dataset. This is a new chronological experiment, not an untouched external-bank test. Original source and license limitations are documented in [the provenance document](../docs/REBUILT_MODEL.md).
+Scores are uncalibrated. The provider's original PCA fitting cannot be audited; the earlier notebook already used this public dataset. This is a new chronological experiment, not an untouched external-bank test. Original source and license limitations are documented in [the provenance document](../docs/archive/REBUILT_MODEL.md).
 
 See [the current project guide](../README.md) for workflow, dataset counts, all metrics, limitations, commands and deployment. Runtime loads this compact export without downloading or training on the full source. Only load trusted local joblib files.

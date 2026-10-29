@@ -17,4 +17,4 @@ Values use local-currency units. The form requires observed before/after balance
 
 No full raw CSV, credentials, or runtime retraining is needed. Use Python 3.12 and the pinned dependencies. `PAYSIM_ARTIFACT_DIR` can select another trusted local bundle; a notebook export does not replace this model. Only load trusted joblib files.
 
-See [PaySim provenance and exact evaluation](../docs/PAYSIM_MODEL.md) and the [project README](../README.md) for reproduction and dashboard instructions.
+See [PaySim provenance and exact evaluation](../docs/archive/PAYSIM_MODEL.md) and the [project README](../README.md) for reproduction and dashboard instructions.

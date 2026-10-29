@@ -1,4 +1,4 @@
-> Historical PaySim mobile-money experiment. The current public app uses real anonymized ULB credit-card records. See [the current guide](../README.md).
+> Historical PaySim mobile-money experiment. The current public app uses real anonymized ULB credit-card records. See [the current guide](../../README.md).
 
 # Credit Card Fraud Detection System: presentation guide
 

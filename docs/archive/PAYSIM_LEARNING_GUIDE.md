@@ -1,12 +1,14 @@
+> Historical document. This describes an earlier iteration; use the repository README for the current application.
+
 # Archived PaySim dashboard guide
 
-This describes the earlier nine-tab PaySim/Sparkov dashboard. The current public app uses the original real anonymized credit-card dataset. See [the current README](../README.md).
+This describes the earlier nine-tab PaySim/Sparkov dashboard. The current public app uses the original real anonymized credit-card dataset. See [the current README](../../README.md).
 
 # CreditVault — Learn and Present Your Fraud Detection Project
 
 **[Download the readable PDF](PaySim_Learning_Guide_Archive.pdf)**
 
-**[Open the app](https://creditvault.streamlit.app/)** · **[Detailed viva guide](../docs/PAYSIM_PRESENTATION.md)**
+**[Open the app](https://creditvault.streamlit.app/)** · **[Detailed viva guide](PAYSIM_PRESENTATION.md)**
 
 This README is your study guide. Read it with the app open beside you. Here, a **page/tab** means one screen of the website; a **slide** means a page in your presentation. The website has nine tabs, and this guide explains all nine. A suggested slide order is included near the end.
 
@@ -572,7 +574,7 @@ You are ready to present when you can answer these without reading:
 - Why is a prediction not the same as a recorded outcome?
 - Why are the last two tabs a separate experiment?
 
-Start with understanding, then practice the short “Say aloud” explanations in your own words. Use [the detailed presentation/viva guide](../docs/PAYSIM_PRESENTATION.md) for further questions and source details.
+Start with understanding, then practice the short “Say aloud” explanations in your own words. Use [the detailed presentation/viva guide](PAYSIM_PRESENTATION.md) for further questions and source details.
 
 ---
 
@@ -641,7 +643,7 @@ The original notebooks, export code, and previous experiments remain available. 
 
 ## Reproduce training and SHAP
 
-Obtain the exact full CSV described in [the model bundle documentation](../presentation_artifacts/README.md), verify its SHA-256, and keep it outside the repository. The exported source-verification metadata supplies the audit file:
+Obtain the exact full CSV described in [the model bundle documentation](../../presentation_artifacts/README.md), verify its SHA-256, and keep it outside the repository. The exported source-verification metadata supplies the audit file:
 
 ```bash
 python prepare_presentation_model.py --data /path/outside/repository/paysim.csv --source-manifest /path/source-audit.json --output /path/paysim-rebuild --sample-size 500000 --seed 42

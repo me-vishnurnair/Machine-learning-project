@@ -32,7 +32,7 @@ The sample is fraud-enriched and overlaps training/test data. Model performance
 uses only `test_data.csv`. Balanced-holdout scores and raw probabilities do not
 represent calibrated fraud risk at the original population prevalence.
 
-See [rebuild provenance](../docs/REBUILT_MODEL.md) and the [project README](../README.md)
+See [rebuild provenance](../docs/archive/REBUILT_MODEL.md) and the [project README](../README.md)
 for source, metrics, optional reproduction, and deployment. Artifacts are ignored
 by default to prevent accidental replacement; this selected bundle is intentionally
 committed. Only replace it with trusted exports and compatible version pins.

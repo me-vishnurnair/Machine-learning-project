@@ -1,4 +1,4 @@
-> Historical Sparkov synthetic credit-card experiment. The current public app uses real anonymized ULB credit-card records. See [the current guide](../README.md).
+> Historical Sparkov synthetic credit-card experiment. The current public app uses real anonymized ULB credit-card records. See [the current guide](../../README.md).
 
 # Presentation and viva guide
 

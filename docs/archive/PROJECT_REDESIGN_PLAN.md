@@ -1,3 +1,5 @@
+> Historical document. This describes an earlier iteration; use the repository README for the current application.
+
 # CreditVault: credit-card project redesign record
 
 **Implemented:** the main project remains **Credit Card Fraud Detection System**. The audited Sparkov source, four trained candidates, validation-selected Gradient Boosting model, two-page dashboard, and executed notebook now implement the direction below. See [the final model report](CARD_MODEL.md) for the actual source, evaluation, and limitations. The rest of this document records the original research plan; proposed alternatives are not additional implemented models.

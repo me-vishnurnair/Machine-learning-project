@@ -1,3 +1,5 @@
+> Historical document. This describes an earlier iteration; use the repository README for the current application.
+
 # Provenance of the included rebuilt model
 
 The project owner explicitly approved rebuilding the uploaded notebook workflow

@@ -1,6 +1,8 @@
+> Historical document. This describes an earlier iteration; use the repository README for the current application.
+
 # CreditVault: making the dashboard usable
 
-**Historical decision note, superseded by the user's final FraudShield task.** The final task explicitly permits a disclosed synthetic dataset. Sparkov was selected for the readable-input pipeline; see the [current guide](../README.md). The text below records the earlier discussion, not the current deployment specification.
+**Historical decision note, superseded by the user's final FraudShield task.** The final task explicitly permits a disclosed synthetic dataset. Sparkov was selected for the readable-input pipeline; see the [current guide](../../README.md). The text below records the earlier discussion, not the current deployment specification.
 
 ## What is wrong with the current experience?
 

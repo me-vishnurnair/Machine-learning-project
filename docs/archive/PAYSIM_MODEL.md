@@ -1,3 +1,5 @@
+> Historical document. This describes an earlier iteration; use the repository README for the current application.
+
 # Separate PaySim transfer model
 
 The six-field **Transfers · easy form** uses a separate fitted model. It does not alter the supplied notebook's Logistic Regression, preprocessing, features, or artifacts. The notebook's anonymized `V1`–`V28` cannot be reconstructed from a transaction type or account balances, so connecting those readable inputs to the original model would fabricate a feature mapping. The project owner approved training this additional model on the authentic public PaySim simulation dataset.

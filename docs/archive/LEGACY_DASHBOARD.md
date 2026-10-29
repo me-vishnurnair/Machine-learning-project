@@ -1,3 +1,5 @@
+> Historical document. This describes an earlier iteration; use the repository README for the current application.
+
 # Archived dashboard documentation
 
 This document describes the previous notebook/PaySim dashboard. Run `streamlit run legacy_dashboard.py` to reproduce that interface. The current public application is described in the root README.
@@ -21,7 +23,7 @@ The easy form is the default on **Single Prediction**. Choose a transaction type
 
 The included transfer model was evaluated on all **1,248,736** transactions in the reserved final period: **99.7397% accuracy, 56.6823% precision, 99.6941% recall, 72.2729% F1, and 0.999885 ROC-AUC**. It flags 3,238 legitimate transactions and misses 13 of 4,250 fraud transactions in that period. High accuracy alone is insufficient for this imbalanced dataset; inspect precision, recall, and the confusion matrix together.
 
-PaySim's readable fields cannot be translated into the notebook's anonymous PCA components. The project owner approved a separate trained model for these inputs, while keeping the notebook model available. PaySim is synthetic and describes a different task; its metrics and uncalibrated fraud scores do not establish real-bank performance. Scores from the two datasets should not be ranked as a direct model comparison. See [PaySim provenance and evaluation](docs/PAYSIM_MODEL.md).
+PaySim's readable fields cannot be translated into the notebook's anonymous PCA components. The project owner approved a separate trained model for these inputs, while keeping the notebook model available. PaySim is synthetic and describes a different task; its metrics and uncalibrated fraud scores do not establish real-bank performance. Scores from the two datasets should not be ranked as a direct model comparison. See [PaySim provenance and evaluation](PAYSIM_MODEL.md).
 
 The supplied Colab notebook contains code and recorded outputs, but no saved fitted model or source CSV. At the project owner's request, the included model was newly trained from the original public ULB credit-card fraud dataset using the notebook's workflow. It preserves the raw features, their order, random undersampling, train/test split, and default Logistic Regression. The new undersampling seed is `42` so this rebuild is reproducible; the original notebook's undersampling was unseeded. **This is a new training run, not the recovered original Colab model.** No export or dataset upload is needed to run the bundled dashboard.
 
@@ -47,7 +49,7 @@ The default unscaled estimator reached its `max_iter=100` limit and emitted a `C
 
 Holdout metrics describe the balanced undersampled population. The model's fraud probability is its raw estimate under that training distribution, not a calibrated fraud risk at the original 0.172749% prevalence. The exploration sample includes all 492 fraud rows and 5,000 legitimate rows and is deliberately fraud-enriched. It overlaps training and holdout data and is not an independent evaluation set.
 
-See [the notebook review](docs/NOTEBOOK_REVIEW.md) and [rebuild provenance](docs/REBUILT_MODEL.md) for the exact source, fingerprints, metrics, and limitations.
+See [the notebook review](NOTEBOOK_REVIEW.md) and [rebuild provenance](REBUILT_MODEL.md) for the exact source, fingerprints, metrics, and limitations.
 
 ## Folder structure
 
@@ -175,7 +177,7 @@ Account sign-in and repository authorization are controlled by Streamlit/GitHub;
 
 ## Optional: reproduce the included model
 
-The canonical dataset listing is [ULB Credit Card Fraud Detection on Kaggle](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud). This build obtained its CSV from a [pinned public mirror ZIP](https://raw.githubusercontent.com/georgymh/ml-fraud-detection/86864707b1cbaa80415bbc41e39c4f1e4371f932/creditcard.csv.zip). Keep the complete CSV outside the checkout, verify the fingerprints in [REBUILT_MODEL.md](docs/REBUILT_MODEL.md), and use the installed pinned dependencies:
+The canonical dataset listing is [ULB Credit Card Fraud Detection on Kaggle](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud). This build obtained its CSV from a [pinned public mirror ZIP](https://raw.githubusercontent.com/georgymh/ml-fraud-detection/86864707b1cbaa80415bbc41e39c4f1e4371f932/creditcard.csv.zip). Keep the complete CSV outside the checkout, verify the fingerprints in [REBUILT_MODEL.md](REBUILT_MODEL.md), and use the installed pinned dependencies:
 
 ```bash
 python prepare_model.py --data /tmp/creditcard.csv --seed 42 --output /tmp/fraud-rebuild-artifacts --source-url https://raw.githubusercontent.com/georgymh/ml-fraud-detection/86864707b1cbaa80415bbc41e39c4f1e4371f932/creditcard.csv.zip
@@ -185,7 +187,7 @@ The script checks exact columns, full class counts, finite numeric values, and t
 
 ## Optional: reproduce the transfer model
 
-Obtain the full [PaySim dataset](https://www.kaggle.com/datasets/ealaxi/paysim1), keep it outside the checkout, and verify the CSV fingerprint documented in [PAYSIM_MODEL.md](docs/PAYSIM_MODEL.md). With the pinned dependencies installed, run:
+Obtain the full [PaySim dataset](https://www.kaggle.com/datasets/ealaxi/paysim1), keep it outside the checkout, and verify the CSV fingerprint documented in [PAYSIM_MODEL.md](PAYSIM_MODEL.md). With the pinned dependencies installed, run:
 
 ```bash
 python prepare_paysim_model.py --data /tmp/paysim.csv --output /tmp/paysim-rebuild-artifacts --seed 42 --max-nonfraud 750000 --holdout-fraction 0.2 --preview-rows 25000 --source-url https://github.com/thuanbui1309/paysim-big-data-baseline/releases/download/data-v1/paysim.csv
@@ -198,7 +200,7 @@ The script validates the full dataset, reserves complete final time steps before
 If you later recover your original live trained session, you can replace the rebuilt bundle with that session's actual fitted state:
 
 1. Open the trained notebook with `model`, `credit_card_data`, `X`, `X_train`, `X_test`, `Y_train`, and `Y_test` still available.
-2. Paste [notebook_export.py](notebook_export.py) into a final cell, or use the notebook ending in `_dashboard_export.ipynb`.
+2. Paste [notebook_export.py](../../notebook_export.py) into a final cell, or use the notebook ending in `_dashboard_export.ipynb`.
 3. Run the export and download `artifacts.zip`. Extract its contents into a separate artifact directory initially so you can preserve the included rebuild.
 4. Match the export's Python version and `requirements-model.txt`, start the app with `FRAUD_ARTIFACT_DIR`, and verify the metrics and predictions. If you intentionally replace the deployment bundle, commit the complete replacement and reinstall its pinned dependencies before redeploying.
 

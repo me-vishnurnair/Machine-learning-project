@@ -104,4 +104,4 @@ python presentation_explain.py /tmp/paysim-presentation-rebuild
 
 Training requires the full source and substantially more memory and time than dashboard inference. Changing the data, sampling, seed, split, package versions, features, or model settings creates a different experiment and requires fresh metadata and explanation assets. The training export reloads the joblib pipeline and CSV demonstration inputs and checks that their predicted scores reproduce the genuine saved test scores.
 
-See [the presentation and viva guide](../docs/PAYSIM_PRESENTATION.md) for source-column meanings, feature formulas, model explanations, metrics, demonstration order, and limitations.
+See [the presentation and viva guide](../docs/archive/PAYSIM_PRESENTATION.md) for source-column meanings, feature formulas, model explanations, metrics, demonstration order, and limitations.

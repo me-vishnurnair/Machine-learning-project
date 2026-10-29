@@ -1,3 +1,5 @@
+> Historical document. This describes an earlier iteration; use the repository README for the current application.
+
 # Review of the supplied Credit Card Fraud Detection notebook
 
 ## Data and exact feature contract
